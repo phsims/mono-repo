@@ -1,10 +1,9 @@
 name: Nx Affected CD
 on:
-  push:
+  pull_request:
     branches:
       - main
     types: [closed]
-  pull_request:
     paths-ignore:
       - '**.md'
 
@@ -12,19 +11,19 @@ jobs:
   build:
     if: github.event.pull-request.merged ==true
     name: Deploy NX Affected 
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        - uses: nrwl/nx-set-shas@v3
-        - run: npm ci
-        - run: npx nx format:check
-        - run: npx nx affected -t lint --parallel=3
-        - run: npx nx affected -t test --parallel=3 --configuration=ci
-        - run: npx nx affected -t build --parallel=3
-        - run: 'npx deploy affected --ci --require-approval never'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v3
+      - run: npm ci
+      - run: npx nx format:check
+      - run: npx nx affected -t lint --parallel=3
+      - run: npx nx affected -t test --parallel=3 --configuration=ci
+      - run: npx nx affected -t build --parallel=3
+      - run: 'npx deploy affected --ci --require-approval never'
         env: 
-        AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-        AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_DEFAULT_REGION: 'eu-west-2'
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_DEFAULT_REGION: 'eu-west-2'
