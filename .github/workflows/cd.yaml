@@ -9,7 +9,7 @@ on:
       - '**.md'
 
 jobs:
-  build:
+  deploy:
     if: github.event.pull_request.merged == true
     name: Deploy NX Affected 
     runs-on: ubuntu-latest
