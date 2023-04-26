@@ -1,9 +1,128 @@
 {
  "Resources": {
+  "mealplanner5652A471": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_email",
+       "Priority": 1
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": false
+    },
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "Thanks for signing up Your verification code is {####}",
+    "EmailVerificationSubject": "You need to verify your email",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": true
+     }
+    },
+    "Schema": [
+     {
+      "Mutable": false,
+      "Name": "family_name",
+      "Required": true
+     },
+     {
+      "Mutable": true,
+      "Name": "address",
+      "Required": false
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": false,
+      "Name": "tenantId",
+      "StringAttributeConstraints": {
+       "MaxLength": "15",
+       "MinLength": "10"
+      }
+     },
+     {
+      "AttributeDataType": "DateTime",
+      "Name": "createdAt"
+     },
+     {
+      "AttributeDataType": "Number",
+      "Mutable": false,
+      "Name": "employeeId",
+      "NumberAttributeConstraints": {
+       "MaxValue": "100",
+       "MinValue": "1"
+      }
+     },
+     {
+      "AttributeDataType": "Boolean",
+      "Mutable": false,
+      "Name": "isAdmin"
+     }
+    ],
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UsernameAttributes": [
+     "email"
+    ],
+    "UserPoolName": "mealplanner-userpool",
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "Thanks for signing up Your verification code is {####}",
+     "EmailSubject": "You need to verify your email",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "aws-cdk-meal-planner/mealplanner/Resource"
+   }
+  },
+  "mealplannermealplanerclientB94D3C54": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "UserPoolId": {
+     "Ref": "mealplanner5652A471"
+    },
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "profile",
+     "phone",
+     "email",
+     "openid",
+     "aws.cognito.signin.user.admin"
+    ],
+    "CallbackURLs": [
+     "https://example.com"
+    ],
+    "ClientName": "mealplaner-client",
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "aws-cdk-meal-planner/mealplanner/mealplaner-client/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzfTM1BMLC/WTU7J1s3JTNKrDi5JTM7WcU7LC0otzi8tSk4FsZ3z81IySzLz82p18vJTUvWyivXLDC30DE30DBWzijMzdYtK80oyc1P1giA0AFK/LCpZAAAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/03JQQrCMBCF4bN0n4xGRN3nAlJxXWoyyrRxBpKpXZTeXUtRXL2P/+3geIBt1Y7FhtjbRDeYLtqG3nxSE+TBpALTtWA+iyTj7/zzFz4Rsv5fa5mXVGORIQdc7IUjKQnPhiUidGXzcidwe3BVV4hsHljpiVCv+wYevOf5nQAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "aws-cdk-meal-planner/CDKMetadata/Default"
