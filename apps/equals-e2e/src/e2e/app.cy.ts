@@ -19,7 +19,7 @@ describe('equals', () => {
   });
 
   it('should open a modal', () => {
-     cy.get('[data-testid="456"]').should('be.visible')
+    cy.get('[data-testid="456"]').should('be.visible');
     cy.get('[data-testid="456"]').click();
     cy.get('[data-testid="contact-modal-456"]').should('be.visible');
   });
