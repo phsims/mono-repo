@@ -3,13 +3,14 @@ on:
   pull_request:
     branches:
       - main
-    types: [closed]
+    types: 
+    - closed
     paths-ignore:
       - '**.md'
 
 jobs:
   build:
-    if: github.event.pull-request.merged ==true
+    if: github.event.pull_request.merged == true
     name: Deploy NX Affected 
     runs-on: ubuntu-latest
     steps:
