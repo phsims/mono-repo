@@ -26,10 +26,7 @@ jobs:
       - run: npx nx affected -t test --parallel=3 --configuration=ci
       - run: npx nx affected -t e2e --parallel=3 --configuration=ci
       - run: npx nx affected -t build --parallel=3
-      - run:  echo '::set-output name:affected_apps::$(./node_modules//.bin/nx affected:apps --plain)'
-
-
-
+      - run: echo '::set-output name:affected_apps::$(./node_modules//.bin/nx affected:apps --plain)'
 
   deploy-aws-cdk-meal-planner:
     runs-on: ubuntu-latest
@@ -37,8 +34,8 @@ jobs:
     if: ${{contains(steps.get-affected-apps.outputs.affected_apps,'aws-cdk-meal-planner')}}
     timeout-minutes: 20
     steps:
-      - run: npx nx run aws-cdk-meal-planner:deploy 
-        env: 
+      - run: npx nx run aws-cdk-meal-planner:deploy
+        env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           AWS_DEFAULT_REGION: 'eu-west-2'
