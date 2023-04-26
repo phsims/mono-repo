@@ -2,7 +2,9 @@
   "name": "mono-repo",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "private": true,
   "dependencies": {
     "@nrwl/next": "15.9.2",
