@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 
 import { mockContacts } from './mock-data';
 import App from './app';
@@ -27,15 +27,17 @@ describe('App', () => {
 
   it('should display cards', async () => {
     const { findAllByRole } = render(<App />);
-
-    expect(await findAllByRole('listitem')).toHaveLength(3);
-    expect(axiosMock).toHaveBeenCalledTimes(1);
+    act(async () => {
+      expect(await findAllByRole('listitem')).toHaveLength(3);
+      expect(axiosMock).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should display  modal', async () => {
     const { findByTestId } = render(<App />);
-
-    fireEvent.click(await findByTestId('456'));
-    expect(await findByTestId('contact-modal-456')).toBeTruthy();
+    act(async () => {
+      fireEvent.click(await findByTestId('456'));
+      expect(await findByTestId('contact-modal-456')).toBeTruthy();
+    });
   });
 });
