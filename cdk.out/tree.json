@@ -1,0 +1,220 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "aws-cdk-meal-planner": {
+        "id": "aws-cdk-meal-planner",
+        "path": "aws-cdk-meal-planner",
+        "children": {
+          "mealplanner": {
+            "id": "mealplanner",
+            "path": "aws-cdk-meal-planner/mealplanner",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "aws-cdk-meal-planner/mealplanner/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                  "aws:cdk:cloudformation:props": {
+                    "accountRecoverySetting": {
+                      "recoveryMechanisms": [
+                        {
+                          "name": "verified_email",
+                          "priority": 1
+                        }
+                      ]
+                    },
+                    "adminCreateUserConfig": {
+                      "allowAdminCreateUserOnly": false
+                    },
+                    "autoVerifiedAttributes": [
+                      "email"
+                    ],
+                    "emailVerificationMessage": "Thanks for signing up Your verification code is {####}",
+                    "emailVerificationSubject": "You need to verify your email",
+                    "policies": {
+                      "passwordPolicy": {
+                        "minimumLength": 8,
+                        "requireLowercase": true,
+                        "requireUppercase": true,
+                        "requireNumbers": true,
+                        "requireSymbols": false
+                      }
+                    },
+                    "schema": [
+                      {
+                        "name": "family_name",
+                        "mutable": false,
+                        "required": true
+                      },
+                      {
+                        "name": "address",
+                        "mutable": true,
+                        "required": false
+                      },
+                      {
+                        "name": "tenantId",
+                        "attributeDataType": "String",
+                        "stringAttributeConstraints": {
+                          "minLength": "10",
+                          "maxLength": "15"
+                        },
+                        "mutable": false
+                      },
+                      {
+                        "name": "createdAt",
+                        "attributeDataType": "DateTime"
+                      },
+                      {
+                        "name": "employeeId",
+                        "attributeDataType": "Number",
+                        "numberAttributeConstraints": {
+                          "minValue": "1",
+                          "maxValue": "100"
+                        },
+                        "mutable": false
+                      },
+                      {
+                        "name": "isAdmin",
+                        "attributeDataType": "Boolean",
+                        "mutable": false
+                      }
+                    ],
+                    "smsVerificationMessage": "The verification code to your new account is {####}",
+                    "usernameAttributes": [
+                      "email"
+                    ],
+                    "userPoolName": "mealplanner-userpool",
+                    "verificationMessageTemplate": {
+                      "defaultEmailOption": "CONFIRM_WITH_CODE",
+                      "emailMessage": "Thanks for signing up Your verification code is {####}",
+                      "emailSubject": "You need to verify your email",
+                      "smsMessage": "The verification code to your new account is {####}"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
+                  "version": "2.76.0"
+                }
+              },
+              "mealplaner-client": {
+                "id": "mealplaner-client",
+                "path": "aws-cdk-meal-planner/mealplanner/mealplaner-client",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "aws-cdk-meal-planner/mealplanner/mealplaner-client/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                      "aws:cdk:cloudformation:props": {
+                        "userPoolId": {
+                          "Ref": "mealplanner5652A471"
+                        },
+                        "allowedOAuthFlows": [
+                          "implicit",
+                          "code"
+                        ],
+                        "allowedOAuthFlowsUserPoolClient": true,
+                        "allowedOAuthScopes": [
+                          "profile",
+                          "phone",
+                          "email",
+                          "openid",
+                          "aws.cognito.signin.user.admin"
+                        ],
+                        "callbackUrLs": [
+                          "https://example.com"
+                        ],
+                        "clientName": "mealplaner-client",
+                        "explicitAuthFlows": [
+                          "ALLOW_USER_PASSWORD_AUTH",
+                          "ALLOW_REFRESH_TOKEN_AUTH"
+                        ],
+                        "supportedIdentityProviders": [
+                          "COGNITO"
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
+                      "version": "2.76.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
+                  "version": "2.76.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cognito.UserPool",
+              "version": "2.76.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "aws-cdk-meal-planner/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "aws-cdk-meal-planner/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.76.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "aws-cdk-meal-planner/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.76.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.6"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "aws-cdk-meal-planner/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.76.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "aws-cdk-meal-planner/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.76.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.76.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.6"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.76.0"
+    }
+  }
+}

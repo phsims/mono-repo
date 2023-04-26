@@ -1,0 +1,19 @@
+{
+  "version": "31.0.0",
+  "files": {
+    "da8e95af830ba34430d5dd5bb8ed928a65236ce5fc9af3635298367ffacb3105": {
+      "source": {
+        "path": "aws-cdk-meal-planner.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "da8e95af830ba34430d5dd5bb8ed928a65236ce5fc9af3635298367ffacb3105.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
