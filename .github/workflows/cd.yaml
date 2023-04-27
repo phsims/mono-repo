@@ -28,11 +28,11 @@ jobs:
   deploy-aws-cdk-meal-planner:
     runs-on: ubuntu-latest
     needs: build
-    if: ${{contains(needs.build-and-test.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
+#     if: ${{contains(needs.build-and-test.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
     timeout-minutes: 20
     steps:
       - name: Get affected
-        run: echo "Running ${{ needs.build-and-test.outputs.AFFECTED_APPS }}"
+        run: echo "Running ${{contains(needs.build-and-test.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}"
       - run: npx nx run aws-cdk-meal-planner:deploy
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
