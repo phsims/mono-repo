@@ -31,8 +31,6 @@ jobs:
     if: ${{contains(needs.build-and-test.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
     timeout-minutes: 20
     steps:
-      - name: Get affected
-        run: echo "The selected color is ${{ needs.build-and-test.outputs.AFFECTED_APPS }}"
       - run: npx nx run aws-cdk-meal-planner:deploy
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
