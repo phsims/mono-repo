@@ -5,4 +5,4 @@
 package-lock.json
 package.json
 tsconfig.base.json
-*.yaml
+**.yaml
