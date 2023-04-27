@@ -15,24 +15,28 @@ jobs:
     outputs:
       affected_apps: ${{steps.affected-apps.outputs.AFFECTED_APPS}}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: nrwl/nx-set-shas@v3
-      - run: npm ci
-      - run: npx nx affected -t build --parallel=3
-      - name: Set affected
-        id: affected-apps
-        run: echo "AFFECTED_APPS=$(npx nx affected:apps --plain)" >> "$GITHUB_OUTPUT"
-
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - uses: nrwl/nx-set-shas@v3
+        - run: npm ci
+        - run: npx nx affected -t build --parallel=3
+        - name: Set affected
+          id: affected-apps
+          run: echo "AFFECTED_APPS=$(npx nx affected:apps --plain)" >> "$GITHUB_OUTPUT"
+ 
   deploy-aws-cdk-meal-planner:
     runs-on: ubuntu-latest
-    needs: build
+    needs:  build
     if: ${{contains(needs.build-and-test.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
     timeout-minutes: 20
     steps:
+      - name: Get affected
+        run: echo "Running ${{ needs.build-and-test.outputs.AFFECTED_APPS }}"
       - run: npx nx run aws-cdk-meal-planner:deploy
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           AWS_DEFAULT_REGION: 'eu-west-2'
+
+
