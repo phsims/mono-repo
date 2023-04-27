@@ -19,21 +19,28 @@ jobs:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: cache-node-modules-${{ hashFiles('package.lock') }}
       - run: npx nx affected -t build --parallel=3
       - name: Set affected
         id: affected-apps
         run: echo "AFFECTED_APPS=$(npx nx affected:apps --plain)" >> "$GITHUB_OUTPUT"
       - name: Get affected
-        run: echo "The selected color is ${{ steps.affected-apps.outputs.AFFECTED_APPS }}"
+        run: echo "The afeted apps are ${{ steps.affected-apps.outputs.AFFECTED_APPS }}"
 
   deploy-aws-cdk-meal-planner:
     runs-on: ubuntu-latest
     needs: build
-#     if: ${{contains(needs.build.outputs.AFFECTED_APPS'aws-cdk-meal-planner')}}
+    if: ${{contains(needs.build.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
     timeout-minutes: 20
     steps:
-      - run: echo "${{needs.build.outputs.AFFECTED_APPS}}"
-      - run: echo "${{contains(needs.build.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}"
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: cache-node-modules-${{ hashFiles('package.lock') }}
       - run: npx nx run aws-cdk-meal-planner:deploy
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
