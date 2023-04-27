@@ -55,11 +55,11 @@ export class AppStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY,
     });
 
-    userpool.addClient('mealplaner-client', {
-      userPoolClientName: 'mealplaner-client',
-      authFlows: {
-        userPassword: true,
-      },
-    });
+    // userpool.addClient('mealplaner-client', {
+    //   userPoolClientName: 'mealplaner-client',
+    //   authFlows: {
+    //     userPassword: true,
+    //   },
+    // });
   }
 }
