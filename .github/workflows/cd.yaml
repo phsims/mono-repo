@@ -32,7 +32,7 @@ jobs:
     # if: ${{contains(needs.build-and-test.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
     timeout-minutes: 20
     steps:
-      - run: echo "${{needs.build-and-test.outputs.AFFECTED_APPS)}}"
+      - run: echo "${{needs.build-and-test.outputs.AFFECTED_APPS}}"
       - run: echo "${{contains(needs.build-and-test.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}"
       - run: npx nx run aws-cdk-meal-planner:deploy
         env:
