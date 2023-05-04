@@ -1,120 +1,54 @@
 {
   "Resources": {
-    "mealplanner5652A471": {
-      "Type": "AWS::Cognito::UserPool",
+    "ddbTableAD20A60E": {
+      "Type": "AWS::DynamoDB::Table",
       "Properties": {
-        "AccountRecoverySetting": {
-          "RecoveryMechanisms": [
-            {
-              "Name": "verified_email",
-              "Priority": 1
-            }
-          ]
-        },
-        "AdminCreateUserConfig": {
-          "AllowAdminCreateUserOnly": false
-        },
-        "AutoVerifiedAttributes": ["email"],
-        "EmailVerificationMessage": "Thanks for signing up Your verification code is {####}",
-        "EmailVerificationSubject": "You need to verify your email",
-        "Policies": {
-          "PasswordPolicy": {
-            "MinimumLength": 8,
-            "RequireLowercase": true,
-            "RequireNumbers": true,
-            "RequireSymbols": false,
-            "RequireUppercase": true
-          }
-        },
-        "Schema": [
+        "KeySchema": [
           {
-            "Mutable": false,
-            "Name": "family_name",
-            "Required": true
-          },
-          {
-            "Mutable": true,
-            "Name": "address",
-            "Required": false
-          },
-          {
-            "AttributeDataType": "String",
-            "Mutable": false,
-            "Name": "tenantId",
-            "StringAttributeConstraints": {
-              "MaxLength": "15",
-              "MinLength": "10"
-            }
-          },
-          {
-            "AttributeDataType": "DateTime",
-            "Name": "createdAt"
-          },
-          {
-            "AttributeDataType": "Number",
-            "Mutable": false,
-            "Name": "employeeId",
-            "NumberAttributeConstraints": {
-              "MaxValue": "100",
-              "MinValue": "1"
-            }
-          },
-          {
-            "AttributeDataType": "Boolean",
-            "Mutable": false,
-            "Name": "isAdmin"
+            "AttributeName": "email",
+            "KeyType": "HASH"
           }
         ],
-        "SmsVerificationMessage": "The verification code to your new account is {####}",
-        "UsernameAttributes": ["email"],
-        "UserPoolName": "mealplanner-userpool",
-        "VerificationMessageTemplate": {
-          "DefaultEmailOption": "CONFIRM_WITH_CODE",
-          "EmailMessage": "Thanks for signing up Your verification code is {####}",
-          "EmailSubject": "You need to verify your email",
-          "SmsMessage": "The verification code to your new account is {####}"
-        }
-      },
-      "UpdateReplacePolicy": "Delete",
-      "DeletionPolicy": "Delete",
-      "Metadata": {
-        "aws:cdk:path": "aws-cdk-meal-planner/mealplanner/Resource"
-      }
-    },
-    "mealplannermealplanerclientB94D3C54": {
-      "Type": "AWS::Cognito::UserPoolClient",
-      "Properties": {
-        "UserPoolId": {
-          "Ref": "mealplanner5652A471"
-        },
-        "AllowedOAuthFlows": ["implicit", "code"],
-        "AllowedOAuthFlowsUserPoolClient": true,
-        "AllowedOAuthScopes": [
-          "profile",
-          "phone",
-          "email",
-          "openid",
-          "aws.cognito.signin.user.admin"
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "email",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "itemType",
+            "AttributeType": "S"
+          }
         ],
-        "CallbackURLs": ["https://example.com"],
-        "ClientName": "mealplaner-client",
-        "ExplicitAuthFlows": [
-          "ALLOW_USER_PASSWORD_AUTH",
-          "ALLOW_REFRESH_TOKEN_AUTH"
+        "BillingMode": "PAY_PER_REQUEST",
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "itemType-index",
+            "KeySchema": [
+              {
+                "AttributeName": "itemType",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
         ],
-        "SupportedIdentityProviders": ["COGNITO"]
+        "TableName": "meal-planner-dynamodb-stack-develop"
       },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
       "Metadata": {
-        "aws:cdk:path": "aws-cdk-meal-planner/mealplanner/mealplaner-client/Resource"
+        "aws:cdk:path": "meal-planner-dynamodb-stack-develop/ddbTable/Resource"
       }
     },
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/03JQQrCMBCF4bN0n4xGRN3nAlJxXWoyyrRxBpKpXZTeXUtRXL2P/+3geIBt1Y7FhtjbRDeYLtqG3nxSE+TBpALTtWA+iyTj7/zzFz4Rsv5fa5mXVGORIQdc7IUjKQnPhiUidGXzcidwe3BVV4hsHljpiVCv+wYevOf5nQAAAA=="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/03IPQqEMBBA4bPYJ6ORhbX3BmovMRNh/JkBExUR776izVbv8eXwLSBL7B60w1FP1MFZR+tGdVOLB9tZ8LbGdpNXZc/PXKryQdbFPfT/pTBSJOFLsaCHIaSbKcB8wCRDINLLypFmD9XbH9novXiAAAAA"
       },
       "Metadata": {
-        "aws:cdk:path": "aws-cdk-meal-planner/CDKMetadata/Default"
+        "aws:cdk:path": "meal-planner-dynamodb-stack-develop/CDKMetadata/Default"
       },
       "Condition": "CDKMetadataAvailable"
     }
@@ -311,6 +245,16 @@
           ]
         }
       ]
+    }
+  },
+  "Outputs": {
+    "ExportsOutputFnGetAttddbTableAD20A60EArn12CDF022": {
+      "Value": {
+        "Fn::GetAtt": ["ddbTableAD20A60E", "Arn"]
+      },
+      "Export": {
+        "Name": "meal-planner-dynamodb-stack-develop:ExportsOutputFnGetAttddbTableAD20A60EArn12CDF022"
+      }
     }
   },
   "Parameters": {
