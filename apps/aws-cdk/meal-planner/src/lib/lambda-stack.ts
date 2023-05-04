@@ -23,7 +23,9 @@ export class LambdaStack extends Stack {
       roleName: `${appName}-lambda-role`,
       description: `Lambda role for ${appName}`,
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
-      managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('ReadOnlyAccess')],
+      managedPolicies: [
+        iam.ManagedPolicy.fromAwsManagedPolicyName('ReadOnlyAccess'),
+      ],
     });
 
     // Attach inline policies to Lambda role
@@ -62,10 +64,19 @@ export class LambdaStack extends Stack {
     // Loop through the definitions and create lambda functions
     for (const lambdaDefinition of lambdaDefinitions) {
       // Get function props based on lambda definition
-      let functionProps = getFunctionProps(lambdaDefinition, lambdaRole, lambdaLayer, appName);
+      let functionProps = getFunctionProps(
+        lambdaDefinition,
+        lambdaRole,
+        lambdaLayer,
+        appName
+      );
 
       // Lambda Function
-      const lambdaFunction = new NodejsFunction(this, `${lambdaDefinition.name}-function`, functionProps);
+      const lambdaFunction = new NodejsFunction(
+        this,
+        `${lambdaDefinition.name}-function`,
+        functionProps
+      );
       this.lambdaFunctions[lambdaDefinition.name] = lambdaFunction;
 
       // Create corresponding Log Group with one month retention

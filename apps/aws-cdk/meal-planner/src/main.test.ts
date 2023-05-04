@@ -6,17 +6,18 @@ import { LambdaStack } from './lib/lambda-stack';
 import { APIStack } from './lib/api-stack';
 
 describe('main', () => {
-
   test('DynamoDBStack Stack', () => {
     const app = new App();
 
-    const dynamoDBStack = new DynamoDBStack(app, 'aws-cdk-meal-plannerTestStack');
+    const dynamoDBStack = new DynamoDBStack(
+      app,
+      'aws-cdk-meal-plannerTestStack'
+    );
 
     Template.fromStack(dynamoDBStack as Stack).templateMatches({
       Resources: {},
     });
   });
-
 
   test('CognitoStack Stack', () => {
     const app = new App();
@@ -36,7 +37,6 @@ describe('main', () => {
   //   });
   // });
 
-
   // test('APIStack Stack', () => {
   // const app = new App();
   //   const apiStack = new APIStack(app, 'aws-cdk-meal-plannerTestStack');
@@ -45,4 +45,4 @@ describe('main', () => {
   //     Resources: {},
   //   });
   // });
-})
+});

@@ -29,9 +29,7 @@
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
       },
-      "dependencies": [
-        "meal-planner-dynamodb-stack-develop.assets"
-      ],
+      "dependencies": ["meal-planner-dynamodb-stack-develop.assets"],
       "metadata": {
         "/meal-planner-dynamodb-stack-develop/ddbTable": [
           {
@@ -99,18 +97,14 @@
         "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/953f6ced62b784773f5d8f6c2e604310050b0e7666f2453bd6d7bc6b21a83af6.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
-        "additionalDependencies": [
-          "meal-planner-cognito-stack-develop.assets"
-        ],
+        "additionalDependencies": ["meal-planner-cognito-stack-develop.assets"],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
       },
-      "dependencies": [
-        "meal-planner-cognito-stack-develop.assets"
-      ],
+      "dependencies": ["meal-planner-cognito-stack-develop.assets"],
       "metadata": {
         "/meal-planner-cognito-stack-develop/userPool/Resource": [
           {
@@ -176,9 +170,7 @@
         "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ce680c3a6b60331365f7fac6ff67357f351b6cbee9d6b421ed67118762d50b63.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
-        "additionalDependencies": [
-          "meal-planner-lambda-stack-develop.assets"
-        ],
+        "additionalDependencies": ["meal-planner-lambda-stack-develop.assets"],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
           "requiresBootstrapStackVersion": 8,
@@ -351,9 +343,7 @@
         "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bc8a5c297067f62c27a806ef9703773198baa5fefe824c76fbdd1e0b96729aaa.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
-        "additionalDependencies": [
-          "meal-planner-api-stack.assets"
-        ],
+        "additionalDependencies": ["meal-planner-api-stack.assets"],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
           "requiresBootstrapStackVersion": 8,

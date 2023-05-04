@@ -202,10 +202,7 @@
                     "userPoolId": {
                       "Ref": "userPoolDC9497E0"
                     },
-                    "allowedOAuthFlows": [
-                      "implicit",
-                      "code"
-                    ],
+                    "allowedOAuthFlows": ["implicit", "code"],
                     "allowedOAuthFlowsUserPoolClient": true,
                     "allowedOAuthScopes": [
                       "profile",
@@ -214,17 +211,13 @@
                       "openid",
                       "aws.cognito.signin.user.admin"
                     ],
-                    "callbackUrLs": [
-                      "https://example.com"
-                    ],
+                    "callbackUrLs": ["https://example.com"],
                     "clientName": "meal-planner-cognito-stack-develop-client",
                     "explicitAuthFlows": [
                       "ALLOW_USER_PASSWORD_AUTH",
                       "ALLOW_REFRESH_TOKEN_AUTH"
                     ],
-                    "supportedIdentityProviders": [
-                      "COGNITO"
-                    ]
+                    "supportedIdentityProviders": ["COGNITO"]
                   }
                 },
                 "constructInfo": {
@@ -521,9 +514,7 @@
                       },
                       "s3Key": "c41d766d7bbc85018feda19264d7316aff97846ae6e68274b1040d4f5b03b8c5.zip"
                     },
-                    "compatibleRuntimes": [
-                      "nodejs14.x"
-                    ],
+                    "compatibleRuntimes": ["nodejs14.x"],
                     "description": "Lambda Layer for meal-planner-lambda-stack-develop"
                   }
                 },
@@ -581,10 +572,7 @@
                       "s3Key": "1e1d38b0f4fc73024bfae0dd8fa79c219af1dac3fff3a7cbb2bebc9d155dce92.zip"
                     },
                     "role": {
-                      "Fn::GetAtt": [
-                        "lambdaRoleC844FDB1",
-                        "Arn"
-                      ]
+                      "Fn::GetAtt": ["lambdaRoleC844FDB1", "Arn"]
                     },
                     "environment": {
                       "variables": {
@@ -683,10 +671,7 @@
                       "s3Key": "809d5f979bc59ede6e79a3c380118c193ede0edaa7e7d77f8e258fd20ad57901.zip"
                     },
                     "role": {
-                      "Fn::GetAtt": [
-                        "lambdaRoleC844FDB1",
-                        "Arn"
-                      ]
+                      "Fn::GetAtt": ["lambdaRoleC844FDB1", "Arn"]
                     },
                     "environment": {
                       "variables": {
@@ -785,10 +770,7 @@
                       "s3Key": "36311b30ab7fd0fdc29a7c5e196819d4b1b2d58ce3744d0588c903e34a9ae884.zip"
                     },
                     "role": {
-                      "Fn::GetAtt": [
-                        "lambdaRoleC844FDB1",
-                        "Arn"
-                      ]
+                      "Fn::GetAtt": ["lambdaRoleC844FDB1", "Arn"]
                     },
                     "environment": {
                       "variables": {
@@ -887,10 +869,7 @@
                       "s3Key": "f8635ba580891d5b857255d43bb32d2b4f2aad3c8e43b8915188e4241e2428c8.zip"
                     },
                     "role": {
-                      "Fn::GetAtt": [
-                        "lambdaRoleC844FDB1",
-                        "Arn"
-                      ]
+                      "Fn::GetAtt": ["lambdaRoleC844FDB1", "Arn"]
                     },
                     "environment": {
                       "variables": {
@@ -989,10 +968,7 @@
                       "s3Key": "a7a9ac9e8f6a6e9c8f8cb083919c86149cc6f51b3d2eccaae846536c705a58b3.zip"
                     },
                     "role": {
-                      "Fn::GetAtt": [
-                        "lambdaRoleC844FDB1",
-                        "Arn"
-                      ]
+                      "Fn::GetAtt": ["lambdaRoleC844FDB1", "Arn"]
                     },
                     "environment": {
                       "variables": {
@@ -1164,10 +1140,7 @@
                   "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
                   "aws:cdk:cloudformation:props": {
                     "corsConfiguration": {
-                      "allowHeaders": [
-                        "Authorization",
-                        "Content-Type"
-                      ],
+                      "allowHeaders": ["Authorization", "Content-Type"],
                       "allowMethods": [
                         "GET",
                         "POST",
@@ -1175,9 +1148,7 @@
                         "DELETE",
                         "PATCH"
                       ],
-                      "allowOrigins": [
-                        "*"
-                      ]
+                      "allowOrigins": ["*"]
                     },
                     "description": "HTTP API Demo - meal-planner-api-stack",
                     "name": "meal-planner-api-stack-api",
@@ -1370,9 +1341,7 @@
                           ]
                         },
                         "enableSimpleResponses": true,
-                        "identitySource": [
-                          "$request.header.Authorization"
-                        ]
+                        "identitySource": ["$request.header.Authorization"]
                       }
                     },
                     "constructInfo": {

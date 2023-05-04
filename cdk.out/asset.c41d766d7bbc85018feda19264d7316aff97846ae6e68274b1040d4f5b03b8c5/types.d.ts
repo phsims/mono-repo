@@ -5,82 +5,82 @@ import { HttpMethod } from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 
 export interface LambdaStackProps extends StackProps {
-    userPool: UserPool;
-    ddbTable?: Table;
+  userPool: UserPool;
+  ddbTable?: Table;
 }
 
 export type LambdaDefinition = {
-    name: string;
-    memoryMB?: number;
-    timeoutMins?: number;
-    environment?: {
-        [key: string]: string;
-    };
-    api?: {
-        path: string;
-        methods: HttpMethod[];
-    };
+  name: string;
+  memoryMB?: number;
+  timeoutMins?: number;
+  environment?: {
+    [key: string]: string;
+  };
+  api?: {
+    path: string;
+    methods: HttpMethod[];
+  };
 };
 
 export interface APIStackProps extends LambdaStackProps {
-    lambdaFunctions: {
-        [key: string]: NodejsFunction;
-    };
+  lambdaFunctions: {
+    [key: string]: NodejsFunction;
+  };
 }
 
 export type APIPayloadValidationResult = {
-    isValid: boolean;
-    errors?: (string | undefined)[];
+  isValid: boolean;
+  errors?: (string | undefined)[];
 };
 
 export type AddUserBody = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    gender: string;
-    jobTitle: string;
-    country: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: string;
+  jobTitle: string;
+  country: string;
 };
 
 export type User = {
-    itemType: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    gender: string;
-    jobTitle: string;
-    country: string;
+  itemType: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: string;
+  jobTitle: string;
+  country: string;
 };
 export type DeleteUserParams = {
-    email?: string;
+  email?: string;
 };
 export type APIAuthorizerEvent = {
-    headers: {
-        authorization: string;
+  headers: {
+    authorization: string;
+  };
+  requestContext: {
+    http: {
+      method: string;
+      path: string;
     };
-    requestContext: {
-        http: {
-            method: string;
-            path: string;
-        };
-    };
+  };
 };
 
 export type APIAuthValidationResult = {
-    isAuthorized: boolean;
+  isAuthorized: boolean;
 };
 
 export type GetUsersParams = {
-    returnAttributes?: string;
-    nextToken?: string;
-    limit?: number;
-    email?: string;
+  returnAttributes?: string;
+  nextToken?: string;
+  limit?: number;
+  email?: string;
 };
 export type UpdateUserBody = {
-    email: string;
-    firstName?: string;
-    lastName?: string;
-    gender?: string;
-    jobTitle?: string;
-    country?: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  gender?: string;
+  jobTitle?: string;
+  country?: string;
 };

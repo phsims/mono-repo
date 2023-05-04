@@ -25,6 +25,5 @@ export class CognitoStack extends Stack {
       },
     });
     this.userPoolClient = userPoolClient;
-
   }
 }
