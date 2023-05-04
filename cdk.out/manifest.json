@@ -1,72 +1,492 @@
 {
   "version": "31.0.0",
   "artifacts": {
-    "aws-cdk-meal-planner.assets": {
+    "meal-planner-dynamodb-stack-develop.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "aws-cdk-meal-planner.assets.json",
+        "file": "meal-planner-dynamodb-stack-develop.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "aws-cdk-meal-planner": {
+    "meal-planner-dynamodb-stack-develop": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "aws-cdk-meal-planner.template.json",
+        "templateFile": "meal-planner-dynamodb-stack-develop.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/da8e95af830ba34430d5dd5bb8ed928a65236ce5fc9af3635298367ffacb3105.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c2b1283bd2891760d2f906b36e1e17b23c534e469e175afd5026216f79fd649a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
-        "additionalDependencies": ["aws-cdk-meal-planner.assets"],
+        "additionalDependencies": [
+          "meal-planner-dynamodb-stack-develop.assets"
+        ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
       },
-      "dependencies": ["aws-cdk-meal-planner.assets"],
+      "dependencies": [
+        "meal-planner-dynamodb-stack-develop.assets"
+      ],
       "metadata": {
-        "/aws-cdk-meal-planner/mealplanner/Resource": [
+        "/meal-planner-dynamodb-stack-develop/ddbTable": [
           {
-            "type": "aws:cdk:logicalId",
-            "data": "mealplanner5652A471"
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ddbTableAD20A60E"
+            }
           }
         ],
-        "/aws-cdk-meal-planner/mealplanner/mealplaner-client/Resource": [
+        "/meal-planner-dynamodb-stack-develop/ddbTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "mealplannermealplanerclientB94D3C54"
+            "data": "ddbTableAD20A60E"
           }
         ],
-        "/aws-cdk-meal-planner/CDKMetadata/Default": [
+        "/meal-planner-dynamodb-stack-develop/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/aws-cdk-meal-planner/CDKMetadata/Condition": [
+        "/meal-planner-dynamodb-stack-develop/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/aws-cdk-meal-planner/BootstrapVersion": [
+        "/meal-planner-dynamodb-stack-develop/Exports/Output{\"Fn::GetAtt\":[\"ddbTableAD20A60E\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttddbTableAD20A60EArn12CDF022"
+          }
+        ],
+        "/meal-planner-dynamodb-stack-develop/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/aws-cdk-meal-planner/CheckBootstrapVersion": [
+        "/meal-planner-dynamodb-stack-develop/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "aws-cdk-meal-planner"
+      "displayName": "meal-planner-dynamodb-stack-develop"
+    },
+    "meal-planner-cognito-stack-develop.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "meal-planner-cognito-stack-develop.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "meal-planner-cognito-stack-develop": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "meal-planner-cognito-stack-develop.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/953f6ced62b784773f5d8f6c2e604310050b0e7666f2453bd6d7bc6b21a83af6.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "meal-planner-cognito-stack-develop.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "meal-planner-cognito-stack-develop.assets"
+      ],
+      "metadata": {
+        "/meal-planner-cognito-stack-develop/userPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolDC9497E0"
+          }
+        ],
+        "/meal-planner-cognito-stack-develop/userPoolClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolClientB67490F4"
+          }
+        ],
+        "/meal-planner-cognito-stack-develop/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/meal-planner-cognito-stack-develop/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/meal-planner-cognito-stack-develop/Exports/Output{\"Ref\":\"userPoolDC9497E0\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefuserPoolDC9497E0A5AAB3BA"
+          }
+        ],
+        "/meal-planner-cognito-stack-develop/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/meal-planner-cognito-stack-develop/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "meal-planner-cognito-stack-develop"
+    },
+    "meal-planner-lambda-stack-develop.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "meal-planner-lambda-stack-develop.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "meal-planner-lambda-stack-develop": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "meal-planner-lambda-stack-develop.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ce680c3a6b60331365f7fac6ff67357f351b6cbee9d6b421ed67118762d50b63.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "meal-planner-lambda-stack-develop.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "meal-planner-dynamodb-stack-develop",
+        "meal-planner-cognito-stack-develop",
+        "meal-planner-lambda-stack-develop.assets"
+      ],
+      "metadata": {
+        "/meal-planner-lambda-stack-develop/lambdaRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaRoleC844FDB1"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/lambdaRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaRoleDefaultPolicyA63A8A92"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/lambdaExecutionAccess/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaExecutionAccess82ECF6E2"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/lambdaLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaLayer857D4AF4"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/get-users-function/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "getusersfunctionDCE47E04"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/fn-get-users-log-group/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fngetusersloggroupD64CE21D"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/add-user-function/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "adduserfunctionDE386518"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/fn-add-user-log-group/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fnadduserloggroup957A2A63"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/delete-user-function/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deleteuserfunctionCD840A04"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/fn-delete-user-log-group/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fndeleteuserloggroup59093BB3"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/update-user-function/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "updateuserfunction781BB7E6"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/fn-update-user-log-group/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fnupdateuserloggroupC5957CB2"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/api-authorizer-function/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apiauthorizerfunction8B368D23"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/fn-api-authorizer-log-group/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fnapiauthorizerloggroup80139702"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/Exports/Output{\"Fn::GetAtt\":[\"getusersfunctionDCE47E04\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttgetusersfunctionDCE47E04Arn5F13E851"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/Exports/Output{\"Fn::GetAtt\":[\"apiauthorizerfunction8B368D23\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttapiauthorizerfunction8B368D23Arn222083EB"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/Exports/Output{\"Fn::GetAtt\":[\"adduserfunctionDE386518\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/Exports/Output{\"Fn::GetAtt\":[\"deleteuserfunctionCD840A04\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttdeleteuserfunctionCD840A04Arn9CF0F714"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/Exports/Output{\"Fn::GetAtt\":[\"updateuserfunction781BB7E6\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttupdateuserfunction781BB7E6Arn89FF464A"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/meal-planner-lambda-stack-develop/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "meal-planner-lambda-stack-develop"
+    },
+    "meal-planner-api-stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "meal-planner-api-stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "meal-planner-api-stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "meal-planner-api-stack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bc8a5c297067f62c27a806ef9703773198baa5fefe824c76fbdd1e0b96729aaa.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "meal-planner-api-stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "meal-planner-lambda-stack-develop",
+        "meal-planner-api-stack.assets"
+      ],
+      "metadata": {
+        "/meal-planner-api-stack/httpApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiC9FAD708"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/DefaultStage/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiDefaultStage49B103A5"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/GET--users/get-users-integration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiGETusersgetusersintegrationF7CF71DD"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/GET--users/get-users-integration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiGETusersgetusersintegrationPermission39BA14B2"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/GET--users/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiGETusersFE1AF524"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/apiAuthorizer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiapiAuthorizerE5FC5B0F"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/mealplannerapistackhttpApiapiAuthorizerBB47A806-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApimealplannerapistackhttpApiapiAuthorizerBB47A806PermissionBC9DFAD4"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/POST--users/add-user-integration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiPOSTusersadduserintegrationBFECFFEA"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/POST--users/add-user-integration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiPOSTusersadduserintegrationPermission00180AD2"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/POST--users/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiPOSTusersEFAA2374"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/DELETE--users/delete-user-integration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiDELETEusersdeleteuserintegration4EB546C4"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/DELETE--users/delete-user-integration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiDELETEusersdeleteuserintegrationPermission72EC1070"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/DELETE--users/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiDELETEusers4F67D4D1"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/PATCH--users/update-user-integration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiPATCHusersupdateuserintegrationDF07AB36"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/PATCH--users/update-user-integration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiPATCHusersupdateuserintegrationPermission4DFBFF39"
+          }
+        ],
+        "/meal-planner-api-stack/httpApi/PATCH--users/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "httpApiPATCHusers1315FC79"
+          }
+        ],
+        "/meal-planner-api-stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/meal-planner-api-stack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/meal-planner-api-stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/meal-planner-api-stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "meal-planner-api-stack"
     },
     "Tree": {
       "type": "cdk:tree",

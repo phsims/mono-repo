@@ -26,6 +26,11 @@
     "@aws-cdk/aws-ec2:uniqueImdsv2TemplateName": true,
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/aws-iam:minimizePolicies": true,
-    "@aws-cdk/core:target-partitions": ["aws", "aws-cn"]
+    "@aws-cdk/core:target-partitions": ["aws", "aws-cn"],
+    "globals": {
+      "appName": "meal-planner",
+      "region": "eu-west-2"
+    },
+    "environment": "develop"
   }
 }
