@@ -61375,10 +61375,6 @@ var require_base2 = __commonJS({
           comb[2] = points[a].toJ().mixedAdd(points[b].neg());
         }
         var index = [
-<<<<<<< HEAD
-          -3 /* -1 -1 */, -1 /* -1 0 */, -5 /* -1 1 */, -7 /* 0 -1 */,
-          0 /* 0 0 */, 7 /* 0 1 */, 5 /* 1 -1 */, 1 /* 1 0 */, 3,
-=======
           -3, /* -1 -1 */
           -1, /* -1 0 */
           -5, /* -1 1 */
@@ -61388,7 +61384,6 @@ var require_base2 = __commonJS({
           5, /* 1 -1 */
           1, /* 1 0 */
           3,
->>>>>>> main
           /* 1 1 */
         ];
         var jsf = getJSF(coeffs[a], coeffs[b]);
