@@ -29,5 +29,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["equals"]
+  "implicitDependencies": []
 }
