@@ -1,8 +1,8 @@
 # Add files here to ignore them from prettier formatting
 /dist
 /coverage
+/cdk.out
 
 package-lock.json
 package.json
 tsconfig.base.json
-*.yaml
