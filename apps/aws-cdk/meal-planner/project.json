@@ -1,0 +1,42 @@
+{
+  "name": "aws-cdk-meal-planner",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/aws-cdk/meal-planner/src",
+  "targets": {
+    "deploy": {
+      "executor": "@ago-dev/nx-aws-cdk-v2:deploy",
+      "options": {}
+    },
+    "destroy": {
+      "executor": "@ago-dev/nx-aws-cdk-v2:destroy",
+      "options": {}
+    },
+    "bootstrap": {
+      "executor": "@ago-dev/nx-aws-cdk-v2:bootstrap",
+      "options": {}
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/aws-cdk/meal-planner/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/aws-cdk/meal-planner/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
