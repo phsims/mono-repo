@@ -30,19 +30,19 @@ jobs:
       - name: Get affected
         run: echo "The afeted apps are ${{ steps.affected-apps.outputs.AFFECTED_APPS }}"
 
-  deploy-aws-cdk-meal-planner:
-    runs-on: ubuntu-latest
-    needs: build
-    if: ${{contains(needs.build.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: cache-node-modules-${{ hashFiles('package.lock') }}
-      - run: npx nx run aws-cdk-meal-planner:deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          AWS_DEFAULT_REGION: 'eu-west-2'
+  # deploy-aws-cdk-meal-planner:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   if: ${{contains(needs.build.outputs.AFFECTED_APPS,'aws-cdk-meal-planner')}}
+  #   timeout-minutes: 20
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/cache@v2
+  #       with:
+  #         path: node_modules
+  #         key: cache-node-modules-${{ hashFiles('package.lock') }}
+  #     - run: npx nx run aws-cdk-meal-planner:deploy
+  #       env:
+  #         AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+  #         AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+  #         AWS_DEFAULT_REGION: 'eu-west-2'
