@@ -1,0 +1,19 @@
+{
+  "version": "31.0.0",
+  "files": {
+    "b9a52157a1014b21068bb1b2761d15ed20eb574f0b4ead22cd94283a6c7240e9": {
+      "source": {
+        "path": "meal-planner-dynamoDb-stack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "b9a52157a1014b21068bb1b2761d15ed20eb574f0b4ead22cd94283a6c7240e9.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

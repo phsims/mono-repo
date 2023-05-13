@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node src/main.ts",
+  "app": "npx ts-node src/bin/main.ts",
   "output": "../../../dist/apps/aws-cdk-meal-planner",
   "requireApproval": "never",
   "watch": {
