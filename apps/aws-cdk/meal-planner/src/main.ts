@@ -9,3 +9,4 @@ const dynamoDbStack = new DynamoDbStack(app, `${appName}-dynamoDb-stack`);
 const lambdaStack = new LambdaStack(app, `${appName}-lambda-stack`, {
   table: dynamoDbStack.table,
 });
+
