@@ -1,5 +1,12 @@
 import { App } from 'aws-cdk-lib';
-import { AppStack } from './stacks/app-stack';
+import { DynamoDbStack } from './lib/dynamodb-stack';
+import { LambdaStack } from './lib/lambda-stack';
 
+const appName = 'meal-planner';
 const app = new App();
-new AppStack(app, 'aws-cdk-meal-planner');
+
+const dynamoDbStack = new DynamoDbStack(app, `${appName}-dynamoDb-stack`);
+const lambdaStack = new LambdaStack(app, `${appName}-lambda-stack`, {
+  table: dynamoDbStack.table,
+});
+

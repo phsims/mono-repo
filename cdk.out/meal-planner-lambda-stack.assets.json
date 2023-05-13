@@ -1,0 +1,19 @@
+{
+  "version": "31.0.0",
+  "files": {
+    "d65fafba5b007a7fc8ae62a30b9be583ec4a1e752d4e3df2bcd0243ee3804288": {
+      "source": {
+        "path": "meal-planner-lambda-stack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "d65fafba5b007a7fc8ae62a30b9be583ec4a1e752d4e3df2bcd0243ee3804288.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
