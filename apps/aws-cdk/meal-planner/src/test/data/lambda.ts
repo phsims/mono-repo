@@ -37,3 +37,9 @@ export const RoleDocumentStatement = {
   ],
   Effect: 'Allow',
 };
+
+export const LambdaLayerProperties = {
+  CompatibleRuntimes: ['nodejs14.x'],
+  Content: { S3Bucket: {} },
+  Description: 'Lambda Layer for TestStack',
+};

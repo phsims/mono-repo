@@ -1,7 +1,20 @@
 {
   "version": "31.0.0",
   "files": {
-    "d65fafba5b007a7fc8ae62a30b9be583ec4a1e752d4e3df2bcd0243ee3804288": {
+    "ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2": {
+      "source": {
+        "path": "asset.ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "c9c307791c22898879e1d7d9cca55e81a6e4764b82a80e558123db0ea9d62edf": {
       "source": {
         "path": "meal-planner-lambda-stack.template.json",
         "packaging": "file"
@@ -9,7 +22,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "d65fafba5b007a7fc8ae62a30b9be583ec4a1e752d4e3df2bcd0243ee3804288.json",
+          "objectKey": "c9c307791c22898879e1d7d9cca55e81a6e4764b82a80e558123db0ea9d62edf.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

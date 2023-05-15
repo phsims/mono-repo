@@ -1,121 +1,81 @@
 {
  "Resources": {
-  "lambdaRoleC844FDB1": {
-   "Type": "AWS::IAM::Role",
+  "userPoolDC9497E0": {
+   "Type": "AWS::Cognito::UserPool",
    "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
       {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "amazonaws.com"
-       }
+       "Name": "verified_phone_number",
+       "Priority": 1
+      },
+      {
+       "Name": "verified_email",
+       "Priority": 2
       }
-     ],
-     "Version": "2012-10-17"
+     ]
     },
-    "Description": "Lambda role for meal-planner-lambda-stack",
-    "ManagedPolicyArns": [
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/ReadOnlyAccess"
-       ]
-      ]
-     }
-    ],
-    "RoleName": "meal-planner-lambda-stack-lambda-role"
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": true
+    },
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "meal-planner-cognito-stack-pool",
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
    },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "meal-planner-lambda-stack/lambdaRole/Resource"
+    "aws:cdk:path": "meal-planner-cognito-stack/userPool/Resource"
    }
   },
-  "lambdaRoleDefaultPolicyA63A8A92": {
-   "Type": "AWS::IAM::Policy",
+  "userPoolClientB67490F4": {
+   "Type": "AWS::Cognito::UserPoolClient",
    "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "dynamodb:BatchGetItem",
-        "dynamodb:GetRecords",
-        "dynamodb:GetShardIterator",
-        "dynamodb:Query",
-        "dynamodb:GetItem",
-        "dynamodb:Scan",
-        "dynamodb:ConditionCheckItem",
-        "dynamodb:BatchWriteItem",
-        "dynamodb:PutItem",
-        "dynamodb:UpdateItem",
-        "dynamodb:DeleteItem",
-        "dynamodb:DescribeTable"
-       ],
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::ImportValue": "meal-planner-dynamoDb-stack:ExportsOutputFnGetAttmealplannerdynamoDbstacktable58FA2352Arn81AE93FC"
-        },
-        {
-         "Fn::Join": [
-          "",
-          [
-           {
-            "Fn::ImportValue": "meal-planner-dynamoDb-stack:ExportsOutputFnGetAttmealplannerdynamoDbstacktable58FA2352Arn81AE93FC"
-           },
-           "/index/*"
-          ]
-         ]
-        }
-       ]
-      }
-     ],
-     "Version": "2012-10-17"
+    "UserPoolId": {
+     "Ref": "userPoolDC9497E0"
     },
-    "PolicyName": "lambdaRoleDefaultPolicyA63A8A92",
-    "Roles": [
-     {
-      "Ref": "lambdaRoleC844FDB1"
-     }
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "profile",
+     "phone",
+     "email",
+     "openid",
+     "aws.cognito.signin.user.admin"
+    ],
+    "CallbackURLs": [
+     "https://example.com"
+    ],
+    "ClientName": "meal-planner-cognito-stack-client",
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "SupportedIdentityProviders": [
+     "COGNITO"
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "meal-planner-lambda-stack/lambdaRole/DefaultPolicy/Resource"
-   }
-  },
-  "lambdaLayer857D4AF4": {
-   "Type": "AWS::Lambda::LayerVersion",
-   "Properties": {
-    "Content": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-     },
-     "S3Key": "ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2.zip"
-    },
-    "CompatibleRuntimes": [
-     "nodejs18.x"
-    ],
-    "Description": "Lambda Layer for meal-planner-lambda-stack"
-   },
-   "Metadata": {
-    "aws:cdk:path": "meal-planner-lambda-stack/lambdaLayer/Resource",
-    "aws:asset:path": "asset.ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Content"
+    "aws:cdk:path": "meal-planner-cognito-stack/userPoolClient/Resource"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02OTQvCMAyGf8vuXXQquKvz6kEmeB1dG0f20ULTKaPsv7t1CJ7e98kDSQ5wzmGfyA+nSndpTzWEh5eqE8uoCiQHCKXtUVxfJubd9qSmFbc2i14OtZYQbnJC90THZM3q/3kWfKwkM3qGyxoLQzGqDn0hGWdRItvRKRTRLh80ZJp49CeWfrVGk4/rjNUILe/eWQ7ZCbKkZaLUjcbTgFBu+QWs6DGH3QAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/03JQQrCMBCF4bN0n4xGBLvPBaTiWtpklGnjDGRSuyi9u5aiuHof/zvAqYZ91U5qQxxsog7mS2nDYD7pFuTBVATmq2I+iyTj7/zzFz4Rcvm/trKsqUGVMQdc7YUjFRJeDEtE6HX3cjW4I7iqVyKbRy70RGi2fQMmBYyZnQAAAA=="
    },
    "Metadata": {
-    "aws:cdk:path": "meal-planner-lambda-stack/CDKMetadata/Default"
+    "aws:cdk:path": "meal-planner-cognito-stack/CDKMetadata/Default"
    },
    "Condition": "CDKMetadataAvailable"
   }

@@ -72,6 +72,77 @@
       },
       "displayName": "meal-planner-dynamoDb-stack"
     },
+    "meal-planner-cognito-stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "meal-planner-cognito-stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "meal-planner-cognito-stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "meal-planner-cognito-stack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3ae4a79be3287726d31ce0c9afd8d9b510e287086c80771832af3d14ae07c324.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "meal-planner-cognito-stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "meal-planner-cognito-stack.assets"
+      ],
+      "metadata": {
+        "/meal-planner-cognito-stack/userPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolDC9497E0"
+          }
+        ],
+        "/meal-planner-cognito-stack/userPoolClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolClientB67490F4"
+          }
+        ],
+        "/meal-planner-cognito-stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/meal-planner-cognito-stack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/meal-planner-cognito-stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/meal-planner-cognito-stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "meal-planner-cognito-stack"
+    },
     "meal-planner-lambda-stack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -88,7 +159,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d65fafba5b007a7fc8ae62a30b9be583ec4a1e752d4e3df2bcd0243ee3804288.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c9c307791c22898879e1d7d9cca55e81a6e4764b82a80e558123db0ea9d62edf.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -117,10 +188,10 @@
             "data": "lambdaRoleDefaultPolicyA63A8A92"
           }
         ],
-        "/meal-planner-lambda-stack/lambdaExecutionAccess/Resource": [
+        "/meal-planner-lambda-stack/lambdaLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "lambdaExecutionAccess82ECF6E2"
+            "data": "lambdaLayer857D4AF4"
           }
         ],
         "/meal-planner-lambda-stack/CDKMetadata/Default": [

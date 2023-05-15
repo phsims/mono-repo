@@ -10,32 +10,20 @@ exports[`LambdaStack Stack: TestStack 1`] = `
     },
   },
   "Resources": {
-    "lambdaExecutionAccess82ECF6E2": {
+    "lambdaLayer857D4AF4": {
       "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:DescribeLogGroups",
-                "logs:DescribeLogStreams",
-                "logs:PutLogEvents",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "lambdaExecutionAccess",
-        "Roles": [
-          {
-            "Ref": "lambdaRoleC844FDB1",
-          },
+        "CompatibleRuntimes": [
+          "nodejs18.x",
         ],
+        "Content": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2.zip",
+        },
+        "Description": "Lambda Layer for TestStack",
       },
-      "Type": "AWS::IAM::Policy",
+      "Type": "AWS::Lambda::LayerVersion",
     },
     "lambdaRoleC844FDB1": {
       "Properties": {
@@ -45,7 +33,7 @@ exports[`LambdaStack Stack: TestStack 1`] = `
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
               "Principal": {
-                "Service": "lambda.amazonaws.com",
+                "Service": "amazonaws.com",
               },
             },
           ],

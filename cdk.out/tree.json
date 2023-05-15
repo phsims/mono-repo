@@ -176,6 +176,155 @@
           "version": "2.78.0"
         }
       },
+      "meal-planner-cognito-stack": {
+        "id": "meal-planner-cognito-stack",
+        "path": "meal-planner-cognito-stack",
+        "children": {
+          "userPool": {
+            "id": "userPool",
+            "path": "meal-planner-cognito-stack/userPool",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "meal-planner-cognito-stack/userPool/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                  "aws:cdk:cloudformation:props": {
+                    "accountRecoverySetting": {
+                      "recoveryMechanisms": [
+                        {
+                          "name": "verified_phone_number",
+                          "priority": 1
+                        },
+                        {
+                          "name": "verified_email",
+                          "priority": 2
+                        }
+                      ]
+                    },
+                    "adminCreateUserConfig": {
+                      "allowAdminCreateUserOnly": true
+                    },
+                    "emailVerificationMessage": "The verification code to your new account is {####}",
+                    "emailVerificationSubject": "Verify your new account",
+                    "smsVerificationMessage": "The verification code to your new account is {####}",
+                    "userPoolName": "meal-planner-cognito-stack-pool",
+                    "verificationMessageTemplate": {
+                      "defaultEmailOption": "CONFIRM_WITH_CODE",
+                      "emailMessage": "The verification code to your new account is {####}",
+                      "emailSubject": "Verify your new account",
+                      "smsMessage": "The verification code to your new account is {####}"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cognito.UserPool",
+              "version": "2.78.0"
+            }
+          },
+          "userPoolClient": {
+            "id": "userPoolClient",
+            "path": "meal-planner-cognito-stack/userPoolClient",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "meal-planner-cognito-stack/userPoolClient/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                  "aws:cdk:cloudformation:props": {
+                    "userPoolId": {
+                      "Ref": "userPoolDC9497E0"
+                    },
+                    "allowedOAuthFlows": [
+                      "implicit",
+                      "code"
+                    ],
+                    "allowedOAuthFlowsUserPoolClient": true,
+                    "allowedOAuthScopes": [
+                      "profile",
+                      "phone",
+                      "email",
+                      "openid",
+                      "aws.cognito.signin.user.admin"
+                    ],
+                    "callbackUrLs": [
+                      "https://example.com"
+                    ],
+                    "clientName": "meal-planner-cognito-stack-client",
+                    "explicitAuthFlows": [
+                      "ALLOW_USER_PASSWORD_AUTH",
+                      "ALLOW_REFRESH_TOKEN_AUTH"
+                    ],
+                    "supportedIdentityProviders": [
+                      "COGNITO"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
+              "version": "2.78.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "meal-planner-cognito-stack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "meal-planner-cognito-stack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.78.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "meal-planner-cognito-stack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.6"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "meal-planner-cognito-stack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.78.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "meal-planner-cognito-stack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.78.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.78.0"
+        }
+      },
       "meal-planner-lambda-stack": {
         "id": "meal-planner-lambda-stack",
         "path": "meal-planner-lambda-stack",
@@ -204,7 +353,7 @@
                           "Action": "sts:AssumeRole",
                           "Effect": "Allow",
                           "Principal": {
-                            "Service": "lambda.amazonaws.com"
+                            "Service": "amazonaws.com"
                           }
                         }
                       ],
@@ -306,48 +455,62 @@
               "version": "2.78.0"
             }
           },
-          "lambdaExecutionAccess": {
-            "id": "lambdaExecutionAccess",
-            "path": "meal-planner-lambda-stack/lambdaExecutionAccess",
+          "lambdaLayer": {
+            "id": "lambdaLayer",
+            "path": "meal-planner-lambda-stack/lambdaLayer",
             "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "meal-planner-lambda-stack/lambdaExecutionAccess/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                  "aws:cdk:cloudformation:props": {
-                    "policyDocument": {
-                      "Statement": [
-                        {
-                          "Action": [
-                            "logs:CreateLogGroup",
-                            "logs:CreateLogStream",
-                            "logs:DescribeLogGroups",
-                            "logs:DescribeLogStreams",
-                            "logs:PutLogEvents"
-                          ],
-                          "Effect": "Allow",
-                          "Resource": "*"
-                        }
-                      ],
-                      "Version": "2012-10-17"
-                    },
-                    "policyName": "lambdaExecutionAccess",
-                    "roles": [
-                      {
-                        "Ref": "lambdaRoleC844FDB1"
-                      }
-                    ]
+              "Code": {
+                "id": "Code",
+                "path": "meal-planner-lambda-stack/lambdaLayer/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "meal-planner-lambda-stack/lambdaLayer/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.78.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "meal-planner-lambda-stack/lambdaLayer/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.78.0"
+                    }
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.78.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "meal-planner-lambda-stack/lambdaLayer/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
+                  "aws:cdk:cloudformation:props": {
+                    "content": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2.zip"
+                    },
+                    "compatibleRuntimes": [
+                      "nodejs18.x"
+                    ],
+                    "description": "Lambda Layer for meal-planner-lambda-stack"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnLayerVersion",
                   "version": "2.78.0"
                 }
               }
             },
             "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_iam.Policy",
+              "fqn": "aws-cdk-lib.aws_lambda.LayerVersion",
               "version": "2.78.0"
             }
           },
