@@ -1,10 +1,10 @@
 import { APIGatewayProxyResultV2, APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import * as utils from '../../lambda-layer/utils';
+import * as utils from '../lambda-layer/utils';
 import {
   updateUserSchema,
   validateAPISchema,
-} from '../../lambda-layer/schema-definitions';
-import { UpdateUserBody, User } from '../../lambda-layer/types';
+} from '../lambda-layer/schema-definitions';
+import { UpdateUserBody, User } from '../lambda-layer/types';
 import { QueryCommand } from '@aws-sdk/lib-dynamodb';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event, context) => {
@@ -43,8 +43,6 @@ export const handler: APIGatewayProxyHandlerV2 = async (event, context) => {
           if (body.firstName) updatedUser.firstName = body.firstName;
           if (body.lastName) updatedUser.lastName = body.lastName;
           if (body.email) updatedUser.email = body.email;
-          if (body.gender) updatedUser.gender = body.gender;
-          if (body.jobTitle) updatedUser.jobTitle = body.jobTitle;
           if (body.country) updatedUser.country = body.country;
           if (process.env.DDB_TABLE)
             await utils.ddbWrite(process.env.DDB_TABLE, updatedUser);

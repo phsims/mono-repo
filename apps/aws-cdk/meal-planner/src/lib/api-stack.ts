@@ -18,177 +18,48 @@ export class APIStack extends Stack {
   constructor(scope: Construct, id: string, props: APIStackProps) {
     super(scope, id, props);
 
-    // Load environment variables from dotenv files
-    // dotenv.config();
-
-    // Check environment variables
-    this.validation();
-    const issuer = process.env.JWT_ISSUER!;
-    const audience = process.env.JWT_AUDIENCE!.split(',');
-    const identitySource = ['$request.header.Authorization'];
-
-    // Create a http api
-    const httpApi = this.createHttpApi();
-    const httpApiAuthCheck = this.createHttpRouteKey(
-      '/auth-check',
-      apigateway.HttpMethod.GET
+    // Define API Authorizer
+    const apiAuthorizer = new HttpLambdaAuthorizer(
+      'apiAuthorizer',
+      props.lambdaFunctions['api-authorizer'],
+      {
+        authorizerName: `${id}-http-api-authorizer`,
+        responseTypes: [HttpLambdaResponseType.SIMPLE],
+      }
     );
 
-    // Create a lambda function and it's integration
-    const authCheckLambda = this.createAuthCheckLambda(
-      httpApi,
-      httpApiAuthCheck
-    );
-    const authCheckLambdaIntegration = this.createHttpIntegration(
-      httpApi,
-      authCheckLambda
-    );
+    // // Define HTTP API
+    const httpApi = new HttpApi(this, 'httpApi', {
+      apiName: `${id}-api`,
+      description: `HTTP API - ${id}`,
+      corsPreflight: {
+        allowHeaders: ['Authorization', 'Content-Type'],
+        allowMethods: [
+          CorsHttpMethod.GET,
+          CorsHttpMethod.POST,
+          CorsHttpMethod.DELETE,
+          CorsHttpMethod.PATCH,
+        ],
+        allowOrigins: ['*'],
+      },
+      defaultAuthorizer: apiAuthorizer,
+    });
 
-    // Create an authorizer and a route with the authorizer
-    const authorizer = this.createAuthorizer(
-      httpApi,
-      issuer,
-      audience,
-      identitySource
-    );
-    const route = this.createRoute(
-      httpApi,
-      httpApiAuthCheck,
-      authCheckLambdaIntegration,
-      authorizer
-    );
-  }
+    // // Get Lambda definitions
+    const lambdaDefinitions = getLambdaDefinitions(id, props.userPool);
 
-  validation() {
-    if (!process.env.JWT_ISSUER || !process.env.JWT_AUDIENCE) {
-      console.error(
-        '------------------------------[ERROR]------------------------------'
-      );
-      console.error(
-        '  Environment variable JWT_ISSUER and/or JWT_AUDIENCE are not set.'
-      );
-      console.error('  Check you .env file or you can set it directly.');
-      console.error('  > export JWT_ISSUER=[REPLACE ME]');
-      console.error('  > export JWT_AUDIENCE=[REPLACE ME]');
-      console.error(
-        '-------------------------------------------------------------------'
-      );
-      process.exit(0);
+    // // Loop through lambda definitions and create api routes if any
+    for (const lambdaDefinition of lambdaDefinitions) {
+      if (lambdaDefinition.api) {
+        httpApi.addRoutes({
+          path: lambdaDefinition.api.path,
+          methods: lambdaDefinition.api.methods,
+          integration: new HttpLambdaIntegration(
+            `${lambdaDefinition.name}-integration`,
+            props.lambdaFunctions[lambdaDefinition.name]
+          ),
+        });
+      }
     }
-  }
-
-  createHttpApi(): apigateway.HttpApi {
-    const httpApi = new apigateway.HttpApi(
-      this,
-      'aws-cdk-amazon-api-gateway-jwt-api',
-      {
-        corsPreflight: {
-          allowHeaders: ['*'],
-          allowOrigins: ['*'],
-          allowMethods: [apigateway.HttpMethod.GET],
-        },
-      }
-    );
-
-    return httpApi;
-  }
-
-  createHttpRouteKey(
-    path: string,
-    method: apigateway.HttpMethod
-  ): apigateway.HttpRouteKey {
-    return apigateway.HttpRouteKey.with(path, method);
-  }
-
-  createAuthCheckLambda(
-    httpApi: apigateway.HttpApi,
-    httpRouteKey: apigateway.HttpRouteKey
-  ): lambda.Function {
-    const authCheckLambda = new lambda.Function(
-      this,
-      'aws-cdk-amazon-api-gateway-jwt-lambda',
-      {
-        runtime: lambda.Runtime.NODEJS_12_X,
-        code: lambda.Code.asset('lambda'),
-        handler: 'auth-check.handler',
-      }
-    );
-
-    authCheckLambda.addPermission(
-      'aws-cdk-amazon-api-gateway-jwt-lambda-permission',
-      {
-        principal: new iam.ServicePrincipal('apigateway.amazonaws.com'),
-        sourceArn: cdk.Stack.of(this).formatArn({
-          service: 'execute-api',
-          resource: httpApi.httpApiId,
-          resourceName: `*/*${httpRouteKey.path ?? ''}`,
-        }),
-      }
-    );
-
-    return authCheckLambda;
-  }
-
-  createHttpIntegration(
-    httpApi: apigateway.HttpApi,
-    handler: lambda.Function
-  ): apigateway.HttpIntegration {
-    const httpIntegration = new apigateway.HttpIntegration(
-      this,
-      'aws-cdk-amazon-api-gateway-jwt-integration',
-      {
-        httpApi,
-        integrationType: apigateway.HttpIntegrationType.LAMBDA_PROXY,
-        integrationUri: handler.functionArn,
-        payloadFormatVersion: apigateway.PayloadFormatVersion.VERSION_2_0,
-      }
-    );
-
-    return httpIntegration;
-  }
-
-  createAuthorizer(
-    httpApi: apigateway.HttpApi,
-    issuer: string,
-    audience: string[],
-    identitySource: string[]
-  ): apigateway.CfnAuthorizer {
-    const authorizer = new apigateway.CfnAuthorizer(
-      this,
-      'aws-cdk-amazon-api-gateway-jwt-authorizer',
-      {
-        apiId: httpApi.httpApiId,
-        authorizerType: 'JWT',
-        name: 'aws-cdk-amazon-api-gateway-jwt',
-        identitySource,
-        jwtConfiguration: {
-          audience,
-          issuer,
-        },
-      }
-    );
-
-    return authorizer;
-  }
-
-  createRoute(
-    httpApi: apigateway.HttpApi,
-    httpRouteKey: apigateway.HttpRouteKey,
-    httpIntegration: apigateway.HttpIntegration,
-    authorizer: apigateway.CfnAuthorizer
-  ): apigateway.CfnRoute {
-    const route = new apigateway.CfnRoute(
-      this,
-      'aws-cdk-amazon-api-gateway-jwt-route',
-      {
-        apiId: httpApi.httpApiId,
-        target: `integrations/${httpIntegration.integrationId}`,
-        routeKey: httpRouteKey.key,
-        authorizationType: 'JWT',
-        authorizerId: authorizer.ref,
-      }
-    );
-
-    return route;
   }
 }

@@ -1,0 +1,432 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APIStack Stack: TestStack 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "httpApiC9FAD708": {
+      "Properties": {
+        "CorsConfiguration": {
+          "AllowHeaders": [
+            "Authorization",
+            "Content-Type",
+          ],
+          "AllowMethods": [
+            "GET",
+            "POST",
+            "DELETE",
+            "PATCH",
+          ],
+          "AllowOrigins": [
+            "*",
+          ],
+        },
+        "Description": "HTTP API - TestStack-api-stack",
+        "Name": "TestStack-api-stack-api",
+        "ProtocolType": "HTTP",
+      },
+      "Type": "AWS::ApiGatewayV2::Api",
+    },
+    "httpApiDELETEusers4F67D4D1": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "httpApiapiAuthorizerE5FC5B0F",
+        },
+        "RouteKey": "DELETE /users",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "httpApiDELETEusersdeleteuserintegration4EB546C4",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "httpApiDELETEusersdeleteuserintegration4EB546C4": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttdeleteuserfunctionCD840A04Arn9CF0F714",
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "httpApiDELETEusersdeleteuserintegrationPermission72EC1070": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttdeleteuserfunctionCD840A04Arn9CF0F714",
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "httpApiC9FAD708",
+              },
+              "/*/*/users",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "httpApiDefaultStage49B103A5": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "AutoDeploy": true,
+        "StageName": "$default",
+      },
+      "Type": "AWS::ApiGatewayV2::Stage",
+    },
+    "httpApiGETusersFE1AF524": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "httpApiapiAuthorizerE5FC5B0F",
+        },
+        "RouteKey": "GET /users",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "httpApiGETusersgetusersintegrationF7CF71DD",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "httpApiGETusersgetusersintegrationF7CF71DD": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttgetusersfunctionDCE47E04Arn5F13E851",
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "httpApiGETusersgetusersintegrationPermission39BA14B2": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttgetusersfunctionDCE47E04Arn5F13E851",
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "httpApiC9FAD708",
+              },
+              "/*/*/users",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "httpApiPATCHusers1315FC79": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "httpApiapiAuthorizerE5FC5B0F",
+        },
+        "RouteKey": "PATCH /users",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "httpApiPATCHusersupdateuserintegrationDF07AB36",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "httpApiPATCHusersupdateuserintegrationDF07AB36": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttupdateuserfunction781BB7E6Arn89FF464A",
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "httpApiPATCHusersupdateuserintegrationPermission4DFBFF39": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttupdateuserfunction781BB7E6Arn89FF464A",
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "httpApiC9FAD708",
+              },
+              "/*/*/users",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "httpApiPOSTusersEFAA2374": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "httpApiapiAuthorizerE5FC5B0F",
+        },
+        "RouteKey": "POST /users",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "httpApiPOSTusersadduserintegrationBFECFFEA",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "httpApiPOSTusersadduserintegrationBFECFFEA": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB",
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "httpApiPOSTusersadduserintegrationPermission00180AD2": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB",
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "httpApiC9FAD708",
+              },
+              "/*/*/users",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "httpApiTestStackapistackhttpApiapiAuthorizerA9BE926DPermission83488814": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttapiauthorizerfunction8B368D23Arn222083EB",
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "httpApiC9FAD708",
+              },
+              "/authorizers/",
+              {
+                "Ref": "httpApiapiAuthorizerE5FC5B0F",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "httpApiapiAuthorizerE5FC5B0F": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "httpApiC9FAD708",
+        },
+        "AuthorizerPayloadFormatVersion": "2.0",
+        "AuthorizerResultTtlInSeconds": 300,
+        "AuthorizerType": "REQUEST",
+        "AuthorizerUri": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":apigateway:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":lambda:path/2015-03-31/functions/",
+              {
+                "Fn::ImportValue": "TestStack:ExportsOutputFnGetAttapiauthorizerfunction8B368D23Arn222083EB",
+              },
+              "/invocations",
+            ],
+          ],
+        },
+        "EnableSimpleResponses": true,
+        "IdentitySource": [
+          "$request.header.Authorization",
+        ],
+        "Name": "TestStack-api-stack-http-api-authorizer",
+      },
+      "Type": "AWS::ApiGatewayV2::Authorizer",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

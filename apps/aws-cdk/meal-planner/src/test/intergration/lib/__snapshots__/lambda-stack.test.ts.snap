@@ -10,6 +10,229 @@ exports[`LambdaStack Stack: TestStack 1`] = `
     },
   },
   "Resources": {
+    "adduserfunctionDE386518": {
+      "DependsOn": [
+        "lambdaRoleDefaultPolicyA63A8A92",
+        "lambdaRoleC844FDB1",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "66c774b168b6d72f74a4a71617971111c6664a78bd0872a15021cdfa23e9854b.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "DDB_TABLE": "TestStack",
+          },
+        },
+        "FunctionName": "TestStack-add-user",
+        "Handler": "index.handler",
+        "Layers": [
+          {
+            "Ref": "lambdaLayer857D4AF4",
+          },
+        ],
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "lambdaRoleC844FDB1",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "apiauthorizerfunction8B368D23": {
+      "DependsOn": [
+        "lambdaRoleDefaultPolicyA63A8A92",
+        "lambdaRoleC844FDB1",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "90ead9af6ed8fc73ebd7e93f86ac6e04a3d53cacf0a7140f53b3328d27f0eb25.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "DDB_TABLE": "TestStack",
+            "USER_POOL_ID": {
+              "Fn::ImportValue": "TestStack-cognito-stack:ExportsOutputRefuserPoolDC9497E0A5AAB3BA",
+            },
+          },
+        },
+        "FunctionName": "TestStack-api-authorizer",
+        "Handler": "index.handler",
+        "Layers": [
+          {
+            "Ref": "lambdaLayer857D4AF4",
+          },
+        ],
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "lambdaRoleC844FDB1",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "deleteuserfunctionCD840A04": {
+      "DependsOn": [
+        "lambdaRoleDefaultPolicyA63A8A92",
+        "lambdaRoleC844FDB1",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "eb8f510dcf87eb8a0a913260a223ea6d096c1c4f0f478114c0e0e52ea8fd3fbd.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "DDB_TABLE": "TestStack",
+          },
+        },
+        "FunctionName": "TestStack-delete-user",
+        "Handler": "index.handler",
+        "Layers": [
+          {
+            "Ref": "lambdaLayer857D4AF4",
+          },
+        ],
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "lambdaRoleC844FDB1",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "fnadduserloggroup957A2A63": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/TestStack-add-user",
+        "RetentionInDays": 30,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "fnapiauthorizerloggroup80139702": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/TestStack-api-authorizer",
+        "RetentionInDays": 30,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "fndeleteuserloggroup59093BB3": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/TestStack-delete-user",
+        "RetentionInDays": 30,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "fngetusersloggroupD64CE21D": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/TestStack-get-users",
+        "RetentionInDays": 30,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "fnupdateuserloggroupC5957CB2": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/TestStack-update-user",
+        "RetentionInDays": 30,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "getusersfunctionDCE47E04": {
+      "DependsOn": [
+        "lambdaRoleDefaultPolicyA63A8A92",
+        "lambdaRoleC844FDB1",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "1f63d5522684a8f38a795b58223bbea056dd82f23717c4bfe86fe965321c0b5e.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "DDB_TABLE": "TestStack",
+          },
+        },
+        "FunctionName": "TestStack-get-users",
+        "Handler": "index.handler",
+        "Layers": [
+          {
+            "Ref": "lambdaLayer857D4AF4",
+          },
+        ],
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "lambdaRoleC844FDB1",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "lambdaExecutionAccess82ECF6E2": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "lambdaExecutionAccess",
+        "Roles": [
+          {
+            "Ref": "lambdaRoleC844FDB1",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "lambdaLayer857D4AF4": {
       "Properties": {
         "CompatibleRuntimes": [
@@ -19,7 +242,7 @@ exports[`LambdaStack Stack: TestStack 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "ad46ff9b56ae47ed45e6fb05f78c0386a972f2e224df7956b255e9683881a0b2.zip",
+          "S3Key": "81eeafbb21121c018e3ad3ae85b4a347add4f3394203f3e3a0ce7b8eb2ca1ab8.zip",
         },
         "Description": "Lambda Layer for TestStack",
       },
@@ -106,6 +329,43 @@ exports[`LambdaStack Stack: TestStack 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "updateuserfunction781BB7E6": {
+      "DependsOn": [
+        "lambdaRoleDefaultPolicyA63A8A92",
+        "lambdaRoleC844FDB1",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "f05414fc171ed520d6ea588de33dfc961a8a0e59bcb8d36dcf93bc478165f2bd.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "DDB_TABLE": "TestStack",
+          },
+        },
+        "FunctionName": "TestStack-update-user",
+        "Handler": "index.handler",
+        "Layers": [
+          {
+            "Ref": "lambdaLayer857D4AF4",
+          },
+        ],
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "lambdaRoleC844FDB1",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
     },
   },
   "Rules": {

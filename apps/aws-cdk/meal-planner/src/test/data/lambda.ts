@@ -1,16 +1,4 @@
-export const AssumeRolePolicyDocument = {
-  Statement: [
-    {
-      Action: 'sts:AssumeRole',
-      Effect: 'Allow',
-      Principal: {
-        Service: 'lambda.amazonaws.com',
-      },
-    },
-  ],
-};
-
-export const ExecutionPolicyStatement = {
+export const LogsIAMPolicy = {
   Action: [
     'logs:CreateLogGroup',
     'logs:CreateLogStream',
@@ -20,7 +8,7 @@ export const ExecutionPolicyStatement = {
   ],
   Effect: 'Allow',
 };
-export const RoleDocumentStatement = {
+export const DynamoIAMPolicy = {
   Action: [
     'dynamodb:BatchGetItem',
     'dynamodb:GetRecords',

@@ -1,0 +1,681 @@
+{
+ "Resources": {
+  "httpApiC9FAD708": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "CorsConfiguration": {
+     "AllowHeaders": [
+      "Authorization",
+      "Content-Type"
+     ],
+     "AllowMethods": [
+      "GET",
+      "POST",
+      "OPTIONS",
+      "DELETE",
+      "PATCH"
+     ],
+     "AllowOrigins": [
+      "*"
+     ]
+    },
+    "Description": "HTTP API Demo - meal-planner-api-stack",
+    "Name": "meal-planner-api-stack-api",
+    "ProtocolType": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/Resource"
+   }
+  },
+  "httpApiDefaultStage49B103A5": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "StageName": "$default",
+    "AutoDeploy": true
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/DefaultStage/Resource"
+   }
+  },
+  "httpApiGETusersgetusersintegrationF7CF71DD": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttgetusersfunctionDCE47E04Arn5F13E851"
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/GET--users/get-users-integration/Resource"
+   }
+  },
+  "httpApiGETusersgetusersintegrationPermission39BA14B2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttgetusersfunctionDCE47E04Arn5F13E851"
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "httpApiC9FAD708"
+       },
+       "/*/*/users"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/GET--users/get-users-integration-Permission"
+   }
+  },
+  "httpApiGETusersFE1AF524": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "RouteKey": "GET /users",
+    "AuthorizationType": "CUSTOM",
+    "AuthorizerId": {
+     "Ref": "httpApiapiAuthorizerE5FC5B0F"
+    },
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "httpApiGETusersgetusersintegrationF7CF71DD"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/GET--users/Resource"
+   }
+  },
+  "httpApiapiAuthorizerE5FC5B0F": {
+   "Type": "AWS::ApiGatewayV2::Authorizer",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "AuthorizerType": "REQUEST",
+    "Name": "meal-planner-api-stack-http-api-authorizer",
+    "AuthorizerPayloadFormatVersion": "2.0",
+    "AuthorizerResultTtlInSeconds": 300,
+    "AuthorizerUri": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":apigateway:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":lambda:path/2015-03-31/functions/",
+       {
+        "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttapiauthorizerfunction8B368D23Arn222083EB"
+       },
+       "/invocations"
+      ]
+     ]
+    },
+    "EnableSimpleResponses": true,
+    "IdentitySource": [
+     "$request.header.Authorization"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/apiAuthorizer/Resource"
+   }
+  },
+  "httpApimealplannerapistackhttpApiapiAuthorizerBB47A806PermissionBC9DFAD4": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttapiauthorizerfunction8B368D23Arn222083EB"
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "httpApiC9FAD708"
+       },
+       "/authorizers/",
+       {
+        "Ref": "httpApiapiAuthorizerE5FC5B0F"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/mealplannerapistackhttpApiapiAuthorizerBB47A806-Permission"
+   }
+  },
+  "httpApiPOSTusersadduserintegrationBFECFFEA": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB"
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/POST--users/add-user-integration/Resource"
+   }
+  },
+  "httpApiPOSTusersadduserintegrationPermission00180AD2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB"
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "httpApiC9FAD708"
+       },
+       "/*/*/users"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/POST--users/add-user-integration-Permission"
+   }
+  },
+  "httpApiPOSTusersEFAA2374": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "RouteKey": "POST /users",
+    "AuthorizationType": "CUSTOM",
+    "AuthorizerId": {
+     "Ref": "httpApiapiAuthorizerE5FC5B0F"
+    },
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "httpApiPOSTusersadduserintegrationBFECFFEA"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/POST--users/Resource"
+   }
+  },
+  "httpApiDELETEusersdeleteuserintegration4EB546C4": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttdeleteuserfunctionCD840A04Arn9CF0F714"
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/DELETE--users/delete-user-integration/Resource"
+   }
+  },
+  "httpApiDELETEusersdeleteuserintegrationPermission72EC1070": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttdeleteuserfunctionCD840A04Arn9CF0F714"
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "httpApiC9FAD708"
+       },
+       "/*/*/users"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/DELETE--users/delete-user-integration-Permission"
+   }
+  },
+  "httpApiDELETEusers4F67D4D1": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "RouteKey": "DELETE /users",
+    "AuthorizationType": "CUSTOM",
+    "AuthorizerId": {
+     "Ref": "httpApiapiAuthorizerE5FC5B0F"
+    },
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "httpApiDELETEusersdeleteuserintegration4EB546C4"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/DELETE--users/Resource"
+   }
+  },
+  "httpApiPATCHusersupdateuserintegrationDF07AB36": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttupdateuserfunction781BB7E6Arn89FF464A"
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/PATCH--users/update-user-integration/Resource"
+   }
+  },
+  "httpApiPATCHusersupdateuserintegrationPermission4DFBFF39": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::ImportValue": "meal-planner-lambda-stack-develop:ExportsOutputFnGetAttupdateuserfunction781BB7E6Arn89FF464A"
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "httpApiC9FAD708"
+       },
+       "/*/*/users"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/PATCH--users/update-user-integration-Permission"
+   }
+  },
+  "httpApiPATCHusers1315FC79": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "httpApiC9FAD708"
+    },
+    "RouteKey": "PATCH /users",
+    "AuthorizationType": "CUSTOM",
+    "AuthorizerId": {
+     "Ref": "httpApiapiAuthorizerE5FC5B0F"
+    },
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "httpApiPATCHusersupdateuserintegrationDF07AB36"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/httpApi/PATCH--users/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02OQQ6CMBBFz8IeRiAmupS40Z3BA5gRKo5CS9oBow13ty0kuvq/f16Tl8NmCzaN8GWSqn4mLV3BnhmrZ+ymi8WeGmTxwveYg93fZNFT7MIhjfDlKFk0GpmU9M9SDRz2YuC70vQReopb7K41gltPQndkjIOnQAujBl2FD3sla+JwSRNs+ztCGu0Wr5XPf5eFsAfm3iv5nJ18my18+9cL7E9riqWqBTzMasy2kK0hix6GKNGDZOoElHN+AUdg0KMiAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-api-stack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

@@ -3,9 +3,9 @@ import { Template, Match } from 'aws-cdk-lib/assertions';
 import { AttributeType, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { UserPool, UserPoolClient } from 'aws-cdk-lib/aws-cognito';
 import {
-  AssumeRolePolicyDocument,
   LambdaLayerProperties,
-  RoleDocumentStatement,
+  LogsIAMPolicy,
+  DynamoIAMPolicy,
 } from '../../data/lambda';
 import { DynamoDbStack } from '../../../lib/dynamodb-stack';
 import { CognitoStack } from '../../../lib/cognito-stack';
@@ -28,22 +28,60 @@ describe('LambdaStack - Unit tests', () => {
     userPool: userPool,
   });
   const template = Template.fromStack(stack as Stack);
-  // test('IAM::Role', () => {
-  //   template.hasResourceProperties('AWS::IAM::Role', {
-  //     AssumeRolePolicyDocument: AssumeRolePolicyDocument,
-  //   });
-  // });
-  // test('lambdaExecution IAM::Policy', () => {
-  //   template.hasResourceProperties('AWS::IAM::Policy', {
-  //     PolicyDocument: {
-  //       Statement: [Match.objectLike(RoleDocumentStatement)],
-  //     },
-  //   });
-  // });
-  // test('lambdaExecution Lambda::LayerVersion', () => {
-  //   template.hasResourceProperties('AWS::Lambda::LayerVersion', LambdaLayerProperties);
-  // });
-  // test('lambdaExecution Lambda::LayerVersion', () => {
-  //   template.hasResourceProperties('AWS::Lambda::LayerVersion', LambdaLayerProperties);
-  // });
+
+  describe('IAM', () => {
+    test('Role', () => {
+      template.hasResource('AWS::IAM::Role', {});
+    });
+
+    test('Policy logs', () => {
+      template.hasResourceProperties('AWS::IAM::Policy', {
+        PolicyDocument: {
+          Statement: [Match.objectLike(LogsIAMPolicy)],
+        },
+      });
+    });
+    test('Policy functions', () => {
+      template.hasResourceProperties('AWS::IAM::Policy', {
+        PolicyDocument: {
+          Statement: [Match.objectLike(DynamoIAMPolicy)],
+        },
+      });
+    });
+
+    describe('Lambda::Function', () => {
+      test('api authorizer ', () => {
+        template.hasResourceProperties(
+          'AWS::Lambda::Function',
+          Match.objectLike({ FunctionName: 'TestStack-api-authorizer' })
+        );
+      });
+      test('add user ', () => {
+        template.hasResourceProperties(
+          'AWS::Lambda::Function',
+          Match.objectLike({ FunctionName: 'TestStack-add-user' })
+        );
+      });
+
+      test('update user ', () => {
+        template.hasResourceProperties(
+          'AWS::Lambda::Function',
+          Match.objectLike({ FunctionName: 'TestStack-update-user' })
+        );
+      });
+
+      test('get user ', () => {
+        template.hasResourceProperties(
+          'AWS::Lambda::Function',
+          Match.objectLike({ FunctionName: 'TestStack-get-users' })
+        );
+      });
+      test('delete user ', () => {
+        template.hasResourceProperties(
+          'AWS::Lambda::Function',
+          Match.objectLike({ FunctionName: 'TestStack-delete-user' })
+        );
+      });
+    });
+  });
 });

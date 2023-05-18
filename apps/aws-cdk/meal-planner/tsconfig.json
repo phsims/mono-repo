@@ -1,8 +1,10 @@
 {
   "extends": "../../../tsconfig.base.json",
+
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "../../../dist/out-tsc",
+    "esModuleInterop": true,
     "types": ["node", "jest"]
   },
   "include": [],

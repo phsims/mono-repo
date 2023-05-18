@@ -52,11 +52,8 @@ export const addUserSchema = {
     firstName: { type: 'string', minLength: 1 },
     lastName: { type: 'string', minLength: 1 },
     email: { type: 'string', minLength: 1 },
-    gender: { type: 'string', minLength: 1 },
-    jobTitle: { type: 'string', minLength: 1 },
-    country: { type: 'string', minLength: 1 },
   },
-  required: ['firstName', 'lastName', 'email', 'gender', 'jobTitle', 'country'],
+  required: ['firstName', 'lastName', 'email', 'country'],
   additionalProperties: false,
 };
 
@@ -77,9 +74,6 @@ export const updateUserSchema = {
     firstName: { type: 'string', minLength: 1 },
     lastName: { type: 'string', minLength: 1 },
     email: { type: 'string', minLength: 1 },
-    gender: { type: 'string', minLength: 1 },
-    jobTitle: { type: 'string', minLength: 1 },
-    country: { type: 'string', minLength: 1 },
   },
   required: ['email'],
   additionalProperties: false,

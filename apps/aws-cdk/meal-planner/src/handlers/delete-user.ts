@@ -1,10 +1,10 @@
 import { APIGatewayProxyResultV2, APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import * as utils from '../../lambda-layer/utils';
+import * as utils from '../lambda-layer/utils';
 import {
   deleteUserSchema,
   validateAPISchema,
-} from '../../lambda-layer/schema-definitions';
-import { DeleteUserParams, User } from '../../lambda-layer/types';
+} from '../lambda-layer/schema-definitions';
+import { DeleteUserParams, User } from '../lambda-layer/types';
 import { QueryCommand } from '@aws-sdk/lib-dynamodb';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event, context) => {

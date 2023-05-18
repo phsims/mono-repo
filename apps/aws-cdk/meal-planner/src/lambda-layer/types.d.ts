@@ -53,3 +53,20 @@ export type User = {
   email: string;
   country: string;
 };
+export type GetUsersParams = {
+  returnAttributes?: string;
+  nextToken?: string;
+  limit?: number;
+  email?: string;
+  country?: string;
+};
+
+export type UpdateUserBody = {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  country?: string;
+};
+export type DeleteUserParams = {
+  email?: string;
+};

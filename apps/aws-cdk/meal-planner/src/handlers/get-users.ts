@@ -1,10 +1,10 @@
 import { APIGatewayProxyHandlerV2, APIGatewayProxyResultV2 } from 'aws-lambda';
-import * as utils from '../../lambda-layer/utils';
+import * as utils from '../lambda-layer/utils';
 import {
   getUsersSchema,
   validateAPISchema,
-} from '../../lambda-layer/schema-definitions';
-import { GetUsersParams } from '../../lambda-layer/types';
+} from '../lambda-layer/schema-definitions';
+import { GetUsersParams } from '../lambda-layer/types';
 import { QueryCommand, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 import _ from 'lodash';
 
