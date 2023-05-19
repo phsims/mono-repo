@@ -1,0 +1,19 @@
+{
+  "version": "31.0.0",
+  "files": {
+    "3ae4a79be3287726d31ce0c9afd8d9b510e287086c80771832af3d14ae07c324": {
+      "source": {
+        "path": "meal-planner-cognito-stack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "3ae4a79be3287726d31ce0c9afd8d9b510e287086c80771832af3d14ae07c324.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
