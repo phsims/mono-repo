@@ -1,7 +1,7 @@
 import { Stack, App } from 'aws-cdk-lib';
 import { Template, Match } from 'aws-cdk-lib/assertions';
 import '@aws-cdk/assert/jest';
-import { Resources } from '../../data/data';
+import { Resources } from '../../data/dynamo';
 import { DynamoDbStack } from '../../../lib/dynamodb-stack';
 test('DynamoDbStack - Unit test', () => {
   const app = new App();
