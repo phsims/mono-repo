@@ -1,6 +1,4 @@
-import { Stack, StackProps, RemovalPolicy } from 'aws-cdk-lib';
-import { Runtime } from 'aws-cdk-lib/aws-lambda';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { Stack } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import {
   Role,
@@ -10,7 +8,6 @@ import {
   PolicyStatement,
   Effect,
 } from 'aws-cdk-lib/aws-iam';
-import * as path from 'path';
 
 import { LambdaStackProps } from '../lambda-layer/types';
 
