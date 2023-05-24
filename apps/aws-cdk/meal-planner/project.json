@@ -24,7 +24,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nrwl/jest:jest  -- -u",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/aws-cdk/meal-planner/jest.config.ts",

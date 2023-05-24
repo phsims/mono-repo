@@ -12,7 +12,7 @@ import {
 } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 import { getLambdaDefinitions } from './lambda-config';
-
+import { HttpMethod } from 'aws-cdk-lib/aws-stepfunctions-tasks';
 export class APIStack extends Stack {
   constructor(scope: Construct, id: string, props: any) {
     super(scope, id, props);
@@ -42,14 +42,10 @@ export class APIStack extends Stack {
         ],
         allowOrigins: ['*'],
       },
-      defaultAuthorizer: apiAuthorizer,
     });
 
     // Get Lambda definitions
-    const lambdaDefinitions = getLambdaDefinitions({
-      id,
-      userPool: props.userPool,
-    });
+    const lambdaDefinitions = getLambdaDefinitions(id);
 
     // Loop through lambda definitions and create api routes if any
     for (const lambdaDefinition of lambdaDefinitions) {

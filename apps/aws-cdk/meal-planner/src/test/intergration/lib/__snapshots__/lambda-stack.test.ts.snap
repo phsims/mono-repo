@@ -37,6 +37,21 @@ exports[`LambdaStack Stack: TestStack 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "lambdaLayer857D4AF4": {
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x",
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "37a6e4f438946e10e2ebe0279912b1f9c4d47b2096aaf30f34f822267ffd13cd.zip",
+        },
+        "Description": "Lambda Layer for TestStack",
+      },
+      "Type": "AWS::Lambda::LayerVersion",
+    },
     "lambdaRoleC844FDB1": {
       "Properties": {
         "AssumeRolePolicyDocument": {

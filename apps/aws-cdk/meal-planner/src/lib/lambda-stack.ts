@@ -11,7 +11,7 @@ import {
 import { LayerVersion, Code, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
-
+import * as path from 'path';
 import { LambdaStackProps } from '../lambda-layer/types';
 import { getLambdaDefinitions, getFunctionProps } from './lambda-config';
 
@@ -26,7 +26,7 @@ export class LambdaStack extends Stack {
     const lambdaRole = new Role(this, 'lambdaRole', {
       roleName: `${id}-lambda-role`,
       description: `Lambda role for ${id}`,
-      assumedBy: new ServicePrincipal('amazonaws.com'),
+      assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
       managedPolicies: [
         ManagedPolicy.fromAwsManagedPolicyName('ReadOnlyAccess'),
       ],
@@ -57,16 +57,13 @@ export class LambdaStack extends Stack {
 
     // Lambda Layer
     const lambdaLayer = new LayerVersion(this, 'lambdaLayer', {
-      code: Code.fromAsset('lambda-layer'),
+      code: Code.fromAsset(path.join(__dirname, '..', 'lambda-layer')),
       compatibleRuntimes: [Runtime.NODEJS_18_X],
       description: `Lambda Layer for ${id}`,
     });
 
     // Get Lambda definitions
-    const lambdaDefinitions = getLambdaDefinitions({
-      id,
-      userPool: props.userPool,
-    });
+    const lambdaDefinitions = getLambdaDefinitions(id, props.userPool);
 
     // Loop through the definitions and create lambda functions
     for (const lambdaDefinition of lambdaDefinitions) {

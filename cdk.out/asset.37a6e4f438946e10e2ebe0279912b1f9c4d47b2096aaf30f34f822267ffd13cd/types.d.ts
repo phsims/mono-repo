@@ -29,22 +29,3 @@ export type LambdaFunctionProps = {
   lambdaRole: iam.Role;
   lambdaLayer: lambda.LayerVersion;
 };
-export type APIPayloadValidationResult = {
-  isValid: boolean;
-  errors?: (string | undefined)[];
-};
-
-export type AddUserBody = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  country: string;
-};
-
-export type User = {
-  itemType: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  country: string;
-};
