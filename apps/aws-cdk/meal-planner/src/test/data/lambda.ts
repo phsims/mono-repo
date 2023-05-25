@@ -1,3 +1,4 @@
+import { HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
 export const AssumeRolePolicyDocument = {
   Statement: [
     {
@@ -37,3 +38,22 @@ export const RoleDocumentStatement = {
   ],
   Effect: 'Allow',
 };
+export const testLambdaDefinition = [
+  {
+    name: 'testLambdaDefinition',
+    environment: {
+      test: 'testenv',
+    },
+    api: {
+      path: '/test-path',
+      methods: [HttpMethod.GET],
+    },
+  },
+];
+export const expectedLambdaDefinition = [
+  {
+    api: { methods: ['POST'], path: '/users' },
+    environment: { DDB_TABLE: 'testid' },
+    name: 'add-user',
+  },
+];

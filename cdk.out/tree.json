@@ -500,6 +500,164 @@
               "version": "2.78.0"
             }
           },
+          "lambdaLayer": {
+            "id": "lambdaLayer",
+            "path": "meal-planner-lambda-stack/lambdaLayer",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "meal-planner-lambda-stack/lambdaLayer/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "meal-planner-lambda-stack/lambdaLayer/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.78.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "meal-planner-lambda-stack/lambdaLayer/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.78.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.78.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "meal-planner-lambda-stack/lambdaLayer/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
+                  "aws:cdk:cloudformation:props": {
+                    "content": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "6e443995e62ba157cc949da6e77d3dff00d86b71d95e3aa983258596648f63c4.zip"
+                    },
+                    "compatibleRuntimes": [
+                      "nodejs18.x"
+                    ],
+                    "description": "Lambda Layer for meal-planner-lambda-stack"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnLayerVersion",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.LayerVersion",
+              "version": "2.78.0"
+            }
+          },
+          "add-user-function": {
+            "id": "add-user-function",
+            "path": "meal-planner-lambda-stack/add-user-function",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "meal-planner-lambda-stack/add-user-function/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "meal-planner-lambda-stack/add-user-function/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.78.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "meal-planner-lambda-stack/add-user-function/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.78.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.78.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "meal-planner-lambda-stack/add-user-function/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "0388cf8f60c53004ae1b2fcd00760bb2d0cc4659c93e2ce3c0772b96be0c5396.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lambdaRoleC844FDB1",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                      }
+                    },
+                    "functionName": "meal-planner-lambda-stack-add-user",
+                    "handler": "index.handler",
+                    "layers": [
+                      {
+                        "Ref": "lambdaLayer857D4AF4"
+                      }
+                    ],
+                    "runtime": "nodejs18.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda_nodejs.NodejsFunction",
+              "version": "2.78.0"
+            }
+          },
+          "fn-add-user-log-group": {
+            "id": "fn-add-user-log-group",
+            "path": "meal-planner-lambda-stack/fn-add-user-log-group",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "meal-planner-lambda-stack/fn-add-user-log-group/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "logGroupName": "/aws/lambda/meal-planner-lambda-stack-add-user",
+                    "retentionInDays": 30
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+              "version": "2.78.0"
+            }
+          },
           "CDKMetadata": {
             "id": "CDKMetadata",
             "path": "meal-planner-lambda-stack/CDKMetadata",
@@ -526,6 +684,24 @@
               "version": "10.2.6"
             }
           },
+          "Exports": {
+            "id": "Exports",
+            "path": "meal-planner-lambda-stack/Exports",
+            "children": {
+              "Output{\"Fn::GetAtt\":[\"adduserfunctionDE386518\",\"Arn\"]}": {
+                "id": "Output{\"Fn::GetAtt\":[\"adduserfunctionDE386518\",\"Arn\"]}",
+                "path": "meal-planner-lambda-stack/Exports/Output{\"Fn::GetAtt\":[\"adduserfunctionDE386518\",\"Arn\"]}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.6"
+            }
+          },
           "BootstrapVersion": {
             "id": "BootstrapVersion",
             "path": "meal-planner-lambda-stack/BootstrapVersion",
@@ -537,6 +713,240 @@
           "CheckBootstrapVersion": {
             "id": "CheckBootstrapVersion",
             "path": "meal-planner-lambda-stack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.78.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.78.0"
+        }
+      },
+      "meal-planner-api-stack": {
+        "id": "meal-planner-api-stack",
+        "path": "meal-planner-api-stack",
+        "children": {
+          "httpApi": {
+            "id": "httpApi",
+            "path": "meal-planner-api-stack/httpApi",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "meal-planner-api-stack/httpApi/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                  "aws:cdk:cloudformation:props": {
+                    "corsConfiguration": {
+                      "allowHeaders": [
+                        "Authorization",
+                        "Content-Type"
+                      ],
+                      "allowMethods": [
+                        "GET",
+                        "POST",
+                        "OPTIONS",
+                        "DELETE",
+                        "PATCH"
+                      ],
+                      "allowOrigins": [
+                        "*"
+                      ]
+                    },
+                    "description": "HTTP API for meal-planner-api-stack",
+                    "name": "meal-planner-api-stack-api",
+                    "protocolType": "HTTP"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                  "version": "2.78.0"
+                }
+              },
+              "DefaultStage": {
+                "id": "DefaultStage",
+                "path": "meal-planner-api-stack/httpApi/DefaultStage",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "meal-planner-api-stack/httpApi/DefaultStage/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "httpApiC9FAD708"
+                        },
+                        "stageName": "$default",
+                        "autoDeploy": true
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                      "version": "2.78.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                  "version": "2.78.0-alpha.0"
+                }
+              },
+              "POST--users": {
+                "id": "POST--users",
+                "path": "meal-planner-api-stack/httpApi/POST--users",
+                "children": {
+                  "add-user-integration": {
+                    "id": "add-user-integration",
+                    "path": "meal-planner-api-stack/httpApi/POST--users/add-user-integration",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "meal-planner-api-stack/httpApi/POST--users/add-user-integration/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "httpApiC9FAD708"
+                            },
+                            "integrationType": "AWS_PROXY",
+                            "integrationUri": {
+                              "Fn::ImportValue": "meal-planner-lambda-stack:ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB"
+                            },
+                            "payloadFormatVersion": "2.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.78.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.78.0-alpha.0"
+                    }
+                  },
+                  "add-user-integration-Permission": {
+                    "id": "add-user-integration-Permission",
+                    "path": "meal-planner-api-stack/httpApi/POST--users/add-user-integration-Permission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::ImportValue": "meal-planner-lambda-stack:ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB"
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":execute-api:",
+                              {
+                                "Ref": "AWS::Region"
+                              },
+                              ":",
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              ":",
+                              {
+                                "Ref": "httpApiC9FAD708"
+                              },
+                              "/*/*/users"
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.78.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "meal-planner-api-stack/httpApi/POST--users/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "httpApiC9FAD708"
+                        },
+                        "routeKey": "POST /users",
+                        "authorizationType": "NONE",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "httpApiPOSTusersadduserintegrationBFECFFEA"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.78.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.78.0-alpha.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+              "version": "2.78.0-alpha.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "meal-planner-api-stack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "meal-planner-api-stack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.78.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "meal-planner-api-stack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.78.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.6"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "meal-planner-api-stack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.78.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "meal-planner-api-stack/CheckBootstrapVersion",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnRule",
               "version": "2.78.0"

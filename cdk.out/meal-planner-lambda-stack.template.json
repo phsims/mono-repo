@@ -118,10 +118,83 @@
     "aws:cdk:path": "meal-planner-lambda-stack/lambdaExecutionAccess/Resource"
    }
   },
+  "lambdaLayer857D4AF4": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "6e443995e62ba157cc949da6e77d3dff00d86b71d95e3aa983258596648f63c4.zip"
+    },
+    "CompatibleRuntimes": [
+     "nodejs18.x"
+    ],
+    "Description": "Lambda Layer for meal-planner-lambda-stack"
+   },
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-lambda-stack/lambdaLayer/Resource",
+    "aws:asset:path": "asset.6e443995e62ba157cc949da6e77d3dff00d86b71d95e3aa983258596648f63c4",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Content"
+   }
+  },
+  "adduserfunctionDE386518": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "0388cf8f60c53004ae1b2fcd00760bb2d0cc4659c93e2ce3c0772b96be0c5396.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "lambdaRoleC844FDB1",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "Variables": {
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "meal-planner-lambda-stack-add-user",
+    "Handler": "index.handler",
+    "Layers": [
+     {
+      "Ref": "lambdaLayer857D4AF4"
+     }
+    ],
+    "Runtime": "nodejs18.x"
+   },
+   "DependsOn": [
+    "lambdaRoleDefaultPolicyA63A8A92",
+    "lambdaRoleC844FDB1"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-lambda-stack/add-user-function/Resource",
+    "aws:asset:path": "asset.0388cf8f60c53004ae1b2fcd00760bb2d0cc4659c93e2ce3c0772b96be0c5396",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "fnadduserloggroup957A2A63": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/meal-planner-lambda-stack-add-user",
+    "RetentionInDays": 30
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "meal-planner-lambda-stack/fn-add-user-log-group/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02KQQqDMBBFz+I+GRsR6t4LSHqAkiYRRuMMmFgp4t3VZuPqvf/4FTwbeBRmjdK6UQb8wPZKxo7iTG80E2yagxdtT392HND+rpltF9pHXmabLzdvmRwmZNoFsfMwxPKrGlA1qGKIiHJeKOHkQWceUu7MtIoAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11PwWrDMAz9lt4drdkG7bUttJcxRga9BtdRgxLHGpa9UUL+fY7TXnp67+khvadX2GxhvdJ/UpimLyxdYPwO2vQqjeqR9ABjxRbV4eoyfrElc5vlwiZl9XBpNIwf+ob+jF6I3ew/62N0JiQ+KXmrtQgGgd0MScM+mh7DXgve79WOG+wEPjM8dpXlVlIUtyfP8SfH3Pk0qQqFozeo8tn0Rkuuzc0fRuIHdg0tPeYI6OTlt9xC+Q7lqhOiwkcXaECoFvwH/QH3KiIBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "meal-planner-lambda-stack/CDKMetadata/Default"
@@ -321,6 +394,19 @@
      ]
     }
    ]
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB": {
+   "Value": {
+    "Fn::GetAtt": [
+     "adduserfunctionDE386518",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "meal-planner-lambda-stack:ExportsOutputFnGetAttadduserfunctionDE386518ArnA40D96EB"
+   }
   }
  },
  "Parameters": {

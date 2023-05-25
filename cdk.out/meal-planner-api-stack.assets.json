@@ -1,0 +1,19 @@
+{
+  "version": "31.0.0",
+  "files": {
+    "be3183c1c47dbb577351fd6434f73f61a5942bb681ad1bfeef945651084a59e9": {
+      "source": {
+        "path": "meal-planner-api-stack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "be3183c1c47dbb577351fd6434f73f61a5942bb681ad1bfeef945651084a59e9.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
