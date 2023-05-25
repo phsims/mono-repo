@@ -38,16 +38,18 @@ export const RoleDocumentStatement = {
   ],
   Effect: 'Allow',
 };
-export const testLambdaDefinition = {
-  name: 'testLambdaDefinition',
-  environment: {
-    test: 'testenv',
+export const testLambdaDefinition = [
+  {
+    name: 'testLambdaDefinition',
+    environment: {
+      test: 'testenv',
+    },
+    api: {
+      path: '/test-path',
+      methods: [HttpMethod.GET],
+    },
   },
-  api: {
-    path: '/test-path',
-    methods: [HttpMethod.GET],
-  },
-};
+];
 export const expectedLambdaDefinition = [
   {
     api: { methods: ['POST'], path: '/users' },

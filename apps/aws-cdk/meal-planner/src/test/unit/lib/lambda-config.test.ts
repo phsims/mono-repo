@@ -1,6 +1,6 @@
 import { Stack, App, RemovalPolicy } from 'aws-cdk-lib';
 import { UserPool } from 'aws-cdk-lib/aws-cognito';
-import { Role } from 'aws-cdk-lib/aws-iam';
+import { Role, ServicePrincipal, LayerVersion } from 'aws-cdk-lib/aws-iam';
 
 import {
   getFunctionProps,
@@ -14,16 +14,10 @@ describe('APIStack - Unit tests', () => {
   const app = new App();
   const testStack = new Stack(app, 'TestStack');
   const userPool = new UserPool(testStack, 'testUserPool');
-  const role = new Role(testStack, 'testRole', {});
-
-  test('getFunctionProps', () => {
-    getFunctionProps(
-      'testid',
-      testLambdaDefinition,
-      testLambdaRole,
-      testLambdaLayer
-    );
+  const testRole = new Role(testStack, 'testRole', {
+    assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
   });
+  const testLambdaLayer = new LayerVersion();
 
   test('getLambdaDefinitions', () => {
     const lambdaDefinitions = getLambdaDefinitions('testid', userPool);
