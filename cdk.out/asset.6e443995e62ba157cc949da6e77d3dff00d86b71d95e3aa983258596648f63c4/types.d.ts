@@ -1,6 +1,9 @@
 import { StackProps } from 'aws-cdk-lib';
 import { Table } from 'aws-cdk-lib/aws-dynamodb';
 import { UserPool } from 'aws-cdk-lib/aws-cognito';
+import { Role } from 'aws-cdk-lib/aws-iam';
+import { LayerVersion } from 'aws-cdk-lib/aws-lambda';
+import { HttpMethod } from 'aws-cdk-lib/aws-stepfunctions-tasks';
 
 export interface LambdaStackProps extends StackProps {
   table: Table;
@@ -26,8 +29,8 @@ export type LambdaDefinitionProps = {
 export type LambdaFunctionProps = {
   id: string;
   lambdaDefinition: LambdaDefinition;
-  lambdaRole: iam.Role;
-  lambdaLayer: lambda.LayerVersion;
+  lambdaRole: Role;
+  lambdaLayer: LayerVersion;
 };
 export type APIPayloadValidationResult = {
   isValid: boolean;
