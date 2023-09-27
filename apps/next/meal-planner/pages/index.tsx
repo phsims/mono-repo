@@ -1,13 +1,21 @@
-import styles from './index.module.scss';
+import { Favourites } from 'meal-planner/components/Favourites';
+import { TopRecipes } from 'meal-planner/components/TopRecipes';
 
-export function Index() {
+import Head from 'next/head';
+
+export default function Home() {
   return (
-    <div className={styles.page}>
-      <div className="wrapper">
-        <div className="container"></div>
-      </div>
-    </div>
+    <>
+      <Head>
+        <title>Meal Plnner app</title>
+      </Head>
+      <main>
+        <h1>Meal Plnner app</h1>
+        <div className="bg-indigo-500 p-2 font-mono">
+          <TopRecipes />
+          <Favourites />
+        </div>
+      </main>
+    </>
   );
 }
-
-export default Index;
