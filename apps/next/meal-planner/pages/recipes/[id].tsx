@@ -1,4 +1,5 @@
 import type { GetStaticProps, GetStaticPaths } from 'next';
+import Image from 'next/image';
 import { ParsedUrlQuery } from 'querystring';
 import { client } from 'meal-planner/api/client';
 import Layout from 'meal-planner/components/Layout/Layout';
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export function RecipePage({ recipe }: Props) {
-  const { name, ingredients, method } = recipe;
+  const { name, ingredients, method, image } = recipe;
 
   return (
     <Layout>
@@ -22,19 +23,27 @@ export function RecipePage({ recipe }: Props) {
         <h1>Loading...</h1>
       ) : (
         <>
-          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-medium text-black-600 leading-normal">
-            {name}
-          </h1>
-          <p className="text-lg text-black-600 capitalize mb-2 mt-4">
-            Ingredients
-          </p>
-          <ul className="text-black-500 self-start list-inside ml-8">
-            {ingredients.map((ingredient, index) => (
-              <li key={index}>
-                <p>{ingredient}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-medium text-black-600 leading-normal">
+                {name}
+              </h1>
+              <p className="text-lg text-black-600 capitalize mb-2 mt-4">
+                Ingredients
+              </p>
+              <ul className="text-black-500 self-start list-inside ml-8">
+                {ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    <p>{ingredient}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative">
+              <Image src={image} alt={name} fill />
+            </div>
+          </div>
+
           <p className="text-lg text-black-600 capitalize mb-2 mt-4">Method</p>
           <ul className=" list-inside ml-8">
             {method.map((action, index) => (
