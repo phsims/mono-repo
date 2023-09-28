@@ -8,5 +8,6 @@ export const RecipeSchema = z.object({
   author: z.string(),
   ingredients: z.array(z.string()),
   method: z.array(z.string()),
+  rating: z.number(),
 });
 export type Recipe = z.infer<typeof RecipeSchema>;

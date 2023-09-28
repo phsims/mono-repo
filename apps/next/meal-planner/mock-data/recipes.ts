@@ -6,6 +6,7 @@ export const recipes = [
     description:
       'Combine a few key Christmas flavours here to make a pie that both children and adults will adore',
     author: 'Mary Cadogan',
+    rating: 2,
     ingredients: [
       '2 tbsp olive oil',
       'knob butter',
@@ -36,6 +37,7 @@ export const recipes = [
     description:
       'An easy-to-make alternative to traditional Christmas cakes which requires no beating',
     author: 'Mary Cadogan',
+    rating: 2.5,
     ingredients: [
       '175g butter, chopped',
       '200g dark muscovado sugar',
@@ -68,6 +70,7 @@ export const recipes = [
     description:
       'These beautiful and classy little cakes make lovely gifts, and kids will enjoy decorating them too',
     author: 'Sara Buenfeld',
+    rating: 5,
     ingredients: [
       '200g dark muscovado sugar',
       '175g butter, chopped',
@@ -106,6 +109,7 @@ export const recipes = [
     description:
       "Paul Hollywood's fruit rolls can be made ahead then heated up before adding a glossy glaze and citrus icing",
     author: 'Paul Hollywood',
+    rating: 4,
     ingredients: [
       '500g strong white flour, plus extra for dusting',
       '7g sachet fast-action dried yeast',
@@ -139,6 +143,7 @@ export const recipes = [
     description:
       "Made these for the second time today, and I have to say they turned out great! I've got large muffin tins and the mixture made 15 muffins, will definetely make these again at christmas time and decorate festively.",
     author: 'Barney Desmazery',
+    rating: 4.2,
     ingredients: [
       '280g self-raising flour',
       '175g golden caster sugar',
@@ -164,6 +169,7 @@ export const recipes = [
     description:
       'A nutty winter salad which is superhealthy, quick to prepare and finished with a light maple syrup dressing',
     author: 'Good Food',
+    rating: 1,
     ingredients: [
       '2 carrots, halved',
       '\u00bd white cabbage, shredded',
@@ -186,6 +192,7 @@ export const recipes = [
     description:
       'Delicious and a synch to make! Have made this a couple of times as a dinner party dessert, very pretty as a winter alternative to Eton mess. The fact you use frozen fruits is great, I just used a bog standard pack of frozen mixed berries and added some home made blackberry liqueur. Like other people, I added more cinnamon. Thumbs up!',
     author: 'Caroline Hire',
+    rating: 1.5,
     ingredients: [
       '600ml double cream',
       '400g Greek yoghurt',
@@ -207,6 +214,7 @@ export const recipes = [
     url: 'https://www.bbcgoodfood.com/recipes/christmas-brownies',
     description: 'can I made these the day before',
     author: 'Miriam Nice',
+    rating: 3.5,
     ingredients: [
       '200g unsalted buttercut into cubes, plus extra for greasing',
       '100g dark chocolate, chopped',
@@ -240,6 +248,7 @@ export const recipes = [
     url: 'https://www.bbcgoodfood.com/recipes/889643/christmas-cosmopolitan',
     description: 'How many servings have you gotten using the above measures?',
     author: 'Good Food',
+    rating: 4.5,
     ingredients: [
       '500ml vodka',
       '500ml gingerwine',
@@ -258,6 +267,7 @@ export const recipes = [
     description:
       'Use up leftover roast turkey and sausagemeat stuffing in this new spin on an Italian classic',
     author: 'Katy Greenwood',
+    rating: 0,
     ingredients: [
       '145g pizza basemix',
       '6 tbsp tomato pasta sauce',
@@ -279,6 +289,7 @@ export const recipes = [
     description:
       "Prepare ahead and pop in the oven when your guests arrive. Perfect if you don't want to be tied to the kitchen",
     author: 'Barney Desmazery',
+    rating: 1,
     ingredients: [
       '50g butter, softened',
       '4 poussin',
@@ -299,6 +310,7 @@ export const recipes = [
     description:
       'A perfect match for cheese and cold meats, and delicious in turkey sandwiches',
     author: 'Mary Berry',
+    rating: 1.5,
     ingredients: [
       '900g tomato',
       '3 red peppers, 1 large aubergine and 1 green pepper (total weight of about 900g/2lb)',
@@ -324,6 +336,7 @@ export const recipes = [
     url: 'https://www.bbcgoodfood.com/recipes/2607642/make-and-mature-christmas-cake',
     description: '25 min prep time? More like an hour.',
     author: 'James Martin',
+    rating: 5,
     ingredients: [
       '1kg mixed dried fruit(use a mix of raisins, sultanas, currants, cherries, cranberries, prunes or figs)',
       'zest and juice 1 orange',
@@ -362,6 +375,7 @@ export const recipes = [
     url: 'https://www.bbcgoodfood.com/recipes/2920/christmas-muffin-mix',
     description: 'A festive treat to give or receive',
     author: 'Good Food',
+    rating: 2.4,
     ingredients: [
       '300g self-raising flour',
       '2 tsp baking powder',

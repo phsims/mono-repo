@@ -16,6 +16,12 @@ const getRecipes = makeEndpoint({
       type: 'Query',
       schema: z.number().positive().optional(),
     },
+    {
+      name: 'rating',
+      description: 'rating',
+      type: 'Query',
+      schema: z.boolean().optional(),
+    },
   ],
 });
 
