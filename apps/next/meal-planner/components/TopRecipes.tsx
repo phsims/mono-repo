@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { RecipeList } from 'meal-planner/components/RecipeList';
 import { client } from 'meal-planner/api/client';
 import type { Recipe } from 'meal-planner/api/schemas';
+import ButtonOutline from 'meal-planner/components/ButtonOutline';
 
 export function TopRecipes() {
   const [topRecipes, setTopRecipes] = useState<Recipe[]>([]);
@@ -35,6 +36,11 @@ export function TopRecipes() {
           </Link>
         ))}
       </RecipeList>
+      <div className=" font-medium ">
+        <Link href="/recipes">
+          <ButtonOutline>View All Recipes</ButtonOutline>
+        </Link>
+      </div>
     </>
   );
 }

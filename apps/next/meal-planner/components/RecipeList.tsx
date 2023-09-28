@@ -19,7 +19,7 @@ export function RecipeList({
         <p className="leading-normal w-10/12  my-2 ">{discription}</p>
       )}
       <div className=" w-full py-14">
-        <ul className="grid grid-cols-4 grid-rows-1 gap-4">{children}</ul>
+        <ul className="grid grid-cols-4  gap-4">{children}</ul>
       </div>
     </>
   );

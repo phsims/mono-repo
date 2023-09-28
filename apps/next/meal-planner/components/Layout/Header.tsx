@@ -22,7 +22,6 @@ export default function Header() {
       >
         <nav className="max-w-screen-xl  mx-auto grid grid-flow-col">
           <Link href="/">
-            {' '}
             <div className="flex items-center  sm:mx-0">
               <Image src="/logo.png" width={75} height={75} alt="logo" />
               <p className="text-lg text-black-600 font-medium capitalize">
