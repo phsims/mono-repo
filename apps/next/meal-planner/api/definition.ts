@@ -1,6 +1,7 @@
 import { makeEndpoint, makeApi } from '@zodios/core';
-import { RecipeSchema } from './schemas';
 import { z } from 'zod';
+import {} from '@zodios/core';
+import { RecipeSchema } from './schemas';
 
 const getRecipes = makeEndpoint({
   method: 'get',
@@ -8,6 +9,22 @@ const getRecipes = makeEndpoint({
   response: z.array(RecipeSchema),
   alias: 'getRecipes',
   description: 'Get first page of recipes',
+  parameters: [
+    {
+      name: 'limit',
+      description: 'Limit',
+      type: 'Query',
+      schema: z.number().positive().optional(),
+    },
+  ],
+});
+
+const getRecipebyId = makeEndpoint({
+  method: 'get',
+  path: '/v1/recipes/:id',
+  response: RecipeSchema,
+  alias: 'getRecipebyId',
+  description: 'Get recipe by ID',
 });
 
 const getFavourites = makeEndpoint({
@@ -26,4 +43,9 @@ const createFavourite = makeEndpoint({
   description: 'Create a new favourite',
 });
 
-export const definition = makeApi([getRecipes, getFavourites, createFavourite]);
+export const definition = makeApi([
+  getRecipes,
+  getRecipebyId,
+  getFavourites,
+  createFavourite,
+]);

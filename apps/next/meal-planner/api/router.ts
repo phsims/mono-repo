@@ -1,38 +1,26 @@
 import { zodiosRouter } from '@zodios/express';
 import { definition } from './definition';
-
+import { recipes } from 'meal-planner/mock-data/recipes';
 export const router = zodiosRouter(definition);
-const fakeRecipes = [
-  {
-    id: 1,
-    title: 'Test Recipe',
-    url: 'https://google.com',
-    score: 100,
-    time: 1234567890,
-    descendants: 100,
-    by: 'test',
-    kids: [1, 2, 3],
-  },
-  {
-    id: 2,
-    title: 'Test Recipe 2',
-    url: 'https://google.com',
-    score: 100,
-    time: 1234567890,
-    descendants: 100,
-    by: 'test',
-    kids: [1, 2, 3],
-  },
-];
 
 router.get('/v1/recipes', async (req, res) => {
-  res.status(200).json(fakeRecipes);
+  const limitParam = req?.query?.limit as number;
+
+  if (limitParam) return res.status(200).json(recipes.slice(0, limitParam));
+
+  return res.status(200).json(recipes);
+});
+
+router.get('/v1/recipes/:id', async (req, res) => {
+  const recipe = recipes.find((recipe) => recipe.id === req.params.id);
+
+  return res.status(200).json(recipe);
 });
 
 router.get('/v1/favourites', async (req, res) => {
-  res.status(200).json(fakeRecipes);
+  return res.status(200).json(recipes);
 });
 
 router.post('/v1/favourites', async (req, res) => {
-  res.status(501);
+  return res.status(501);
 });
