@@ -3,7 +3,7 @@ import { TopRecipes } from 'meal-planner/components/TopRecipes/TopRecipes';
 import Head from 'next/head';
 import Layout from 'meal-planner/components/Layout/Layout';
 
-export default function Home() {
+export function Home() {
   return (
     <>
       <Head>
@@ -20,3 +20,4 @@ export default function Home() {
     </>
   );
 }
+export default Home;

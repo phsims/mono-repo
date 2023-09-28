@@ -4,7 +4,7 @@ import { client } from 'meal-planner/api/client';
 import type { Recipe } from 'meal-planner/api/schemas';
 import Layout from 'meal-planner/components/Layout/Layout';
 
-export default function AllRecipes() {
+export function Recipes() {
   const [allRecipes, setallRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -25,3 +25,5 @@ export default function AllRecipes() {
     </>
   );
 }
+
+export default Recipes;

@@ -1,12 +1,7 @@
-import type {
-  InferGetStaticPropsType,
-  GetStaticProps,
-  GetStaticPaths,
-} from 'next';
+import type { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { client } from 'meal-planner/api/client';
 import Layout from 'meal-planner/components/Layout/Layout';
-import RecipeItem from 'meal-planner/components/RecipeItem/RecipeItem';
 
 import { Recipe } from 'meal-planner/api/schemas';
 
@@ -18,7 +13,7 @@ interface Props {
   recipe: Recipe;
 }
 
-export default function RecipePage({ recipe }: Props) {
+export function RecipePage({ recipe }: Props) {
   const { name, ingredients, method } = recipe;
 
   return (
@@ -76,3 +71,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: true,
   };
 };
+
+export default RecipePage;
