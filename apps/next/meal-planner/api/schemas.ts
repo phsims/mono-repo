@@ -9,5 +9,6 @@ export const RecipeSchema = z.object({
   ingredients: z.array(z.string()),
   method: z.array(z.string()),
   rating: z.number(),
+  image: z.string(),
 });
 export type Recipe = z.infer<typeof RecipeSchema>;

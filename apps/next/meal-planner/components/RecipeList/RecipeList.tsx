@@ -24,7 +24,7 @@ export function RecipeList({ title, discription, recipes }: Props) {
               <Link
                 key={index}
                 href={`/recipes/${recipe.id}`}
-                className="flex flex-col px-3  border-2 border-gray-500 hover:border-orange-500 transition-all rounded-lg p-8 h-full "
+                className="flex flex-col  border-2 border-gray-500 hover:border-orange-500 transition-all rounded-lg  h-full "
               >
                 <RecipeItem {...recipe} />
               </Link>
