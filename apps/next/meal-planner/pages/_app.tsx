@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'meal-planner/styles/styles.css';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+export default function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -14,5 +14,3 @@ function CustomApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-export default CustomApp;
