@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Recipe } from 'meal-planner/api/schemas';
-import RecipeItem from 'meal-planner/components/RecipeItem';
+import RecipeItem from 'meal-planner/components/RecipeItem/RecipeItem';
 
 interface Props {
   title: string;
@@ -35,3 +35,5 @@ export function RecipeList({ title, discription, recipes }: Props) {
     </>
   );
 }
+
+export default RecipeList;

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { RecipeList } from 'meal-planner/components/RecipeList';
+import { RecipeList } from 'meal-planner/components/RecipeList/RecipeList';
 import { client } from 'meal-planner/api/client';
 import type { Recipe } from 'meal-planner/api/schemas';
-import RecipeItem from './RecipeItem';
-import ButtonOutline from 'meal-planner/components/ButtonOutline';
+import ButtonOutline from 'meal-planner/components/ButtonOutline/ButtonOutline';
 
 export function TopRecipes() {
   const [topRecipes, setTopRecipes] = useState<Recipe[]>([]);
@@ -16,7 +15,6 @@ export function TopRecipes() {
         setTopRecipes(recipes);
       });
   }, []);
-
   return (
     <>
       <RecipeList
@@ -32,3 +30,5 @@ export function TopRecipes() {
     </>
   );
 }
+
+export default TopRecipes;

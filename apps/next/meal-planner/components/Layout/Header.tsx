@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Link as LinkScroll } from 'react-scroll';
-import ButtonOutline from 'meal-planner/components/ButtonOutline';
+import ButtonOutline from 'meal-planner/components/xButtonOutline';
 
 export default function Header() {
   const [activeLink, setActiveLink] = useState(null);

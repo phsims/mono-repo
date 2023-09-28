@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { RecipeList } from 'meal-planner/components/RecipeList';
+import { RecipeList } from 'meal-planner/components/RecipeList/RecipeList';
 import { client } from 'meal-planner/api/client';
 import type { Recipe } from 'meal-planner/api/schemas';
 import Layout from 'meal-planner/components/Layout/Layout';

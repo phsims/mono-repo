@@ -1,5 +1,4 @@
-import { Favourites } from 'meal-planner/components/Favourites';
-import { TopRecipes } from 'meal-planner/components/TopRecipes';
+import { TopRecipes } from 'meal-planner/components/TopRecipes/TopRecipes';
 
 import Head from 'next/head';
 import Layout from 'meal-planner/components/Layout/Layout';

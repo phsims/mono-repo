@@ -1,7 +1,7 @@
 import { Recipe } from 'meal-planner/api/schemas';
-import StarRating from './StarRating/StarRating';
+import StarRating from 'meal-planner/components/StarRating/StarRating';
 
-export default function RecipeItem({ name, description, rating }: Recipe) {
+export function RecipeItem({ name, description, rating }: Recipe) {
   return (
     <>
       <p className="text-lg text-black-600 capitalize">{name}</p>
@@ -16,3 +16,5 @@ export default function RecipeItem({ name, description, rating }: Recipe) {
     </>
   );
 }
+
+export default RecipeItem;

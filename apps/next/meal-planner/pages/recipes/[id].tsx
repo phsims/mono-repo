@@ -6,7 +6,7 @@ import type {
 import { ParsedUrlQuery } from 'querystring';
 import { client } from 'meal-planner/api/client';
 import Layout from 'meal-planner/components/Layout/Layout';
-import RecipeItem from 'meal-planner/components/RecipeItem';
+import RecipeItem from 'meal-planner/components/RecipeItem/RecipeItem';
 
 import { Recipe } from 'meal-planner/api/schemas';
 
