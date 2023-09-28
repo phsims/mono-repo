@@ -22,18 +22,8 @@ export function TopRecipes() {
       <RecipeList
         title="Top Recipes"
         discription="Explore a curated collection of top-rated recipes from around the world on our website. Discover mouthwatering dishes, expertly crafted and reviewed by culinary enthusiasts. Elevate your cooking game with our handpicked selection of the most delicious recipes for every palate"
-      >
-        {topRecipes.map((recipe, index) => (
-          <Link
-            href={`/recipes/${recipe.id}`}
-            className="px-3 flex flex-col border-2 border-gray-500 hover:border-orange-500 transition-all rounded-lg p-8 "
-          >
-            <li key={index}>
-              <RecipeItem {...recipe} />
-            </li>
-          </Link>
-        ))}
-      </RecipeList>
+        recipes={topRecipes}
+      />
       <div className=" font-medium ">
         <Link href="/recipes">
           <ButtonOutline>View All Recipes</ButtonOutline>
